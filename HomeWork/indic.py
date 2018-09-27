@@ -1,0 +1,21 @@
+indices = '''
+High-technology_exports.xls
+External_debt_stocks_short-term.xls
+Inflation_consumer_prices.xls
+GINI_index.xls
+Researchers_in_R&D.xls
+Agriculture_forestry_and_fishing_value_added.xls
+Urban_population.xls
+Foreign_direct_investment_net_inflows.xls
+Industry_(including_construction)_value_added.xls
+GDP_per_capita_growth.xls
+Government_expenditure_on_education_total.xls
+Gross_savings.xls
+Population_growth.xls
+Time_required_to_start_a_business.xls
+Total_tax_rate.xls
+Unemployment_total.xls
+Ease_of_doing_business_index.xls
+Expense.xls
+GDP_per_capita.xls
+'''
