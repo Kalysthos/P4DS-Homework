@@ -1,103 +1,103 @@
-http://api.worldbank.org/v2/es/indicator/NY.GDP.PCAP.CD?downloadformat=excel PIB per cápita (US$ a precios actuales)
+http://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=excel GDP per capita (current US$)
 
-AGRICULTURA
-http://api.worldbank.org/v2/es/indicator/NV.AGR.TOTL.ZS?downloadformat=excel Agricultura, valor agregado (% del PIB)
-http://api.worldbank.org/v2/es/indicator/AG.PRD.FOOD.XD?downloadformat=excel Índice de producción de alimentos (2004-2006 = 100)
-http://api.worldbank.org/v2/es/indicator/AG.LND.ARBL.HA.PC?downloadformat=excel Tierras cultivables (hectáreas por persona)
-http://api.worldbank.org/v2/es/indicator/AG.SRF.TOTL.K2?downloadformat=excel Superfície (kilómetros cuadrados)
-http://api.worldbank.org/v2/es/indicator/AG.LND.TRAC.ZS?downloadformat=excel Maquinaria agrícola, tractores por cada 100 kilómetros cuadrados de tierra cultivable
-http://api.worldbank.org/v2/es/indicator/SP.RUR.TOTL.ZS?downloadformat=excel Población rural (% de la población total)
+Agriculture & Rural Development
+http://api.worldbank.org/v2/en/indicator/NV.AGR.TOTL.ZS?downloadformat=excel Agriculture, forestry, and fishing, value added (% of GDP)
+http://api.worldbank.org/v2/en/indicator/AG.PRD.FOOD.XD?downloadformat=excel Food production index (2004-2006 = 100)
+http://api.worldbank.org/v2/en/indicator/AG.LND.ARBL.HA.PC?downloadformat=excel Arable land (hectares per person)
+http://api.worldbank.org/v2/en/indicator/AG.SRF.TOTL.K2?downloadformat=excel Surface area (sq. km)
+http://api.worldbank.org/v2/en/indicator/AG.LND.TRAC.ZS?downloadformat=excel Agricultural machinery, tractors per 100 sq. km of arable land
+http://api.worldbank.org/v2/en/indicator/SP.RUR.TOTL.ZS?downloadformat=excel Rural population
 
-MUDANÇA CLIMÁTICA
-http://api.worldbank.org/v2/es/indicator/EG.ELC.ACCS.ZS?downloadformat=excel Acesso à electricidade (% de población) 
-http://api.worldbank.org/v2/es/indicator/EN.ATM.CO2E.PC?downloadformat=excel Emissões de CO2 (toneladas métricas por cápita)
-http://api.worldbank.org/v2/es/indicator/SP.URB.TOTL?downloadformat=excel Población urbana 
-http://api.worldbank.org/v2/es/indicator/SP.POP.TOTL?downloadformat=excel Población, total 
-http://api.worldbank.org/v2/es/indicator/EG.USE.ELEC.KH.PC?downloadformat=excel Consumo de energia elétrica (kWh por cápita) 
-http://api.worldbank.org/v2/es/indicator/SP.POP.GROW?downloadformat=excel Crecimiento de la población (% anual) 
-http://api.worldbank.org/v2/es/indicator/IC.BUS.EASE.XQ?downloadformat=excel Índice de facilidade de participação em negócios (1 = regras favoráveis aos negócios) 
-http://api.worldbank.org/v2/es/indicator/SP.URB.TOTL.IN.ZS?downloadformat=excel Población urbana (% del total) 
-http://api.worldbank.org/v2/es/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Tasa de finalização da educação de primeiro nível, total (% del grupo etario correspondiente) 
+Climate Change
+http://api.worldbank.org/v2/en/indicator/EG.ELC.ACCS.ZS?downloadformat=excel Access to electricity (% of population)
+http://api.worldbank.org/v2/en/indicator/EN.ATM.CO2E.PC?downloadformat=excel CO2 emissions (metric tons per capita)
+http://api.worldbank.org/v2/en/indicator/SP.URB.TOTL?downloadformat=excel Urban population
+http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=excel Population, total 
+http://api.worldbank.org/v2/en/indicator/EG.USE.ELEC.KH.PC?downloadformat=excel Electric power consumption (kWh per capita)
+http://api.worldbank.org/v2/en/indicator/SP.POP.GROW?downloadformat=excel Population growth (annual %)
+http://api.worldbank.org/v2/en/indicator/IC.BUS.EASE.XQ?downloadformat=excel Ease of doing business index (1=most business-friendly regulations)
+http://api.worldbank.org/v2/en/indicator/SP.URB.TOTL.IN.ZS?downloadformat=excel Urban population (% of total) 
+http://api.worldbank.org/v2/en/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Primary completion rate, total (% of relevant age group)
 
-CIÊNCIA E TECNOLOGIA
- http://api.worldbank.org/v2/es/indicator/IP.JRN.ARTC.SC?downloadformat=excel Artículos en publicaciones científicas y técnicas
-http://api.worldbank.org/v2/es/indicator/TX.VAL.TECH.CD?downloadformat=excel Exportaciones de productos de alta tecnología (US$ a precios actuales) 
-http://api.worldbank.org/v2/es/indicator/GB.XPD.RSDV.GD.ZS?downloadformat=excel Gasto en investigación y desarrollo (% del PIB) 
+Science & Technology
+ http://api.worldbank.org/v2/en/indicator/IP.JRN.ARTC.SC?downloadformat=excel Scientific and technical journal articles
+http://api.worldbank.org/v2/en/indicator/TX.VAL.TECH.CD?downloadformat=excel High-technology exports (% of manufactured exports)
+http://api.worldbank.org/v2/en/indicator/GB.XPD.RSDV.GD.ZS?downloadformat=excel Research and development expenditure (% of GDP) 
 
-COMÉRCIO
-http://api.worldbank.org/v2/es/indicator/TG.VAL.TOTL.GD.ZS?downloadformat=excel Comercio de mercaderías (% del PIB)
-http://api.worldbank.org/v2/es/indicator/TX.VAL.MMTL.ZS.UN?downloadformat=excel Exportaciones de metales y minerales (% de las exportaciones de mercaderías)
-http://api.worldbank.org/v2/es/indicator/LP.LPI.OVRL.XQ?downloadformat=excel Índice de desempeño logístico: Total (De 1= bajo a 5= alto)
-http://api.worldbank.org/v2/es/indicator/ST.INT.XPND.MP.ZS?downloadformat=excel Turismo internacional, gastos (% del total de importaciones)
-http://api.worldbank.org/v2/es/indicator/ST.INT.RCPT.XP.ZS?downloadformat=excel Turismo internacional, recibos (% del total de exportaciones)
-http://api.worldbank.org/v2/es/indicator/NE.EXP.GNFS.ZS?downloadformat=excel Exportaciones de bienes y servicios (% del PIB)
-http://api.worldbank.org/v2/es/indicator/TX.VAL.MRCH.CD.WT?downloadformat=excel Exportaciones de mercaderías (US$ a precios actuales)
-http://api.worldbank.org/v2/es/indicator/NE.IMP.GNFS.ZS?downloadformat=excel Importaciones de bienes y servicios (% del PIB)
-http://api.worldbank.org/v2/es/indicator/TM.VAL.MRCH.CD.WT?downloadformat=excel Importaciones de mercaderías (US$ a precios actuales)
-http://api.worldbank.org/v2/es/indicator/TT.PRI.MRCH.XD.WD?downloadformat=excel Índice de termos de troca líquidos (2000 = 100)
+Trade
+http://api.worldbank.org/v2/en/indicator/TG.VAL.TOTL.GD.ZS?downloadformat=excel Merchandise trade (% of GDP)
+http://api.worldbank.org/v2/en/indicator/TX.VAL.MMTL.ZS.UN?downloadformat=excel Ores and metals exports (% of merchandise exports)
+http://api.worldbank.org/v2/en/indicator/LP.LPI.OVRL.XQ?downloadformat=excel Logistics performance index: Overall (1=low to 5=high)
+http://api.worldbank.org/v2/en/indicator/ST.INT.XPND.MP.ZS?downloadformat=excel International tourism, expenditures (% of total imports)
+http://api.worldbank.org/v2/en/indicator/ST.INT.RCPT.XP.ZS?downloadformat=excel International tourism, receipts (% of total exports)
+http://api.worldbank.org/v2/en/indicator/NE.EXP.GNFS.ZS?downloadformat=excel Exports of goods and services (% of GDP)
+http://api.worldbank.org/v2/en/indicator/TX.VAL.MRCH.CD.WT?downloadformat=excel Merchandise exports (current US$)
+http://api.worldbank.org/v2/en/indicator/NE.IMP.GNFS.ZS?downloadformat=excel Imports of goods and services (% of GDP)
+http://api.worldbank.org/v2/en/indicator/TM.VAL.MRCH.CD.WT?downloadformat=excel Merchandise imports (current US$)
+http://api.worldbank.org/v2/en/indicator/TT.PRI.MRCH.XD.WD?downloadformat=excel Net barter terms of trade index (2000 = 100)
 
 
-Dívida externa
-http://api.worldbank.org/v2/es/indicator/BN.CAB.XOKA.CD?downloadformat=excel Saldo em cuenta corriente (balança de pagos, US $ a precios actuales)
-http://api.worldbank.org/v2/es/indicator/DT.DOD.DIMF.CD?downloadformat=excel Uso de créditos del FMI (DOD, US$ a precios actuales)
-http://api.worldbank.org/v2/es/indicator/DT.DOD.DECT.CD?downloadformat=excel Dívida externa acumulada, total (DOD, US $ a preços correntes)
-http://api.worldbank.org/v2/es/indicator/BX.KLT.DINV.CD.WD?downloadformat=excel Investimento estrangeiro direto, entrada líquida de capital (balanço de pagamentos, US $ a preços correntes)
-http://api.worldbank.org/v2/es/indicator/DT.DOD.MWBG.CD?downloadformat=excel Empréstimos do BIRD e créditos da AID (DOD, US $ a preços correntes)
-http://api.worldbank.org/v2/es/indicator/FI.RES.TOTL.CD?downloadformat=excel Total de reservas (incluye oro, US$ a precios actuales)
+External Debt
+http://api.worldbank.org/v2/en/indicator/BN.CAB.XOKA.CD?downloadformat=excel Current account balance (BoP, current US$)
+http://api.worldbank.org/v2/en/indicator/DT.DOD.DIMF.CD?downloadformat=excel Use of IMF credit (DOD, current US$)
+http://api.worldbank.org/v2/en/indicator/DT.DOD.DECT.CD?downloadformat=excel External debt stocks (% of GNI)
+http://api.worldbank.org/v2/en/indicator/BX.KLT.DINV.CD.WD?downloadformat=excel Foreign direct investment, net inflows (BoP, current US$)
+http://api.worldbank.org/v2/en/indicator/DT.DOD.MWBG.CD?downloadformat=excel IBRD loans and IDA credits (DOD, current US$)
+http://api.worldbank.org/v2/en/indicator/FI.RES.TOTL.CD?downloadformat=excel Total reserves (includes gold, current US$)
 
-Economia e crescimento
-http://api.worldbank.org/v2/es/indicator/NY.ADJ.SVNG.GN.ZS?downloadformat=excel Ahorro neto ajustado, incluido el daño por emisión de partículas (% del INB)
-http://api.worldbank.org/v2/es/indicator/NY.GNS.ICTR.ZS?downloadformat=excel Ahorro bruto (% del PIB)
-http://api.worldbank.org/v2/es/indicator/NE.EXP.GNFS.ZS?downloadformat=excel Exportaciones de bienes y servicios (% del PIB)
-http://api.worldbank.org/v2/es/indicator/NE.GDI.TOTL.ZS?downloadformat=excel Formación bruta de capital (% del PIB)
-http://api.worldbank.org/v2/es/indicator/GC.XPN.TOTL.GD.ZS?downloadformat=excel Gasto (% del PIB)
-http://api.worldbank.org/v2/es/indicator/FP.CPI.TOTL.ZG?downloadformat=excel Inflación, precios al consumidor (% anual)
-http://api.worldbank.org/v2/es/indicator/NY.GDP.DEFL.KD.ZG?downloadformat=excel Inflación, índice de deflación del PIB (% anual)
-http://api.worldbank.org/v2/es/indicator/BX.KLT.DINV.CD.WD?downloadformat=excel Investimento directo estrangeiro de investimento, o afluxo líquido (BOP, US $ atuais)
+Economy & Growth
+http://api.worldbank.org/v2/en/indicator/NY.ADJ.SVNG.GN.ZS?downloadformat=excel Adjusted net savings, including particulate emission damage (% of GNI)
+http://api.worldbank.org/v2/en/indicator/NY.GNS.ICTR.ZS?downloadformat=excel Gross savings (% of GDP)
+http://api.worldbank.org/v2/en/indicator/NE.EXP.GNFS.ZS?downloadformat=excel Exports of goods and services (% of GDP)
+http://api.worldbank.org/v2/en/indicator/NE.GDI.TOTL.ZS?downloadformat=excel Gross capital formation (% of GDP)
+http://api.worldbank.org/v2/en/indicator/GC.XPN.TOTL.GD.ZS?downloadformat=excel Expense (% of GDP)
+http://api.worldbank.org/v2/en/indicator/FP.CPI.TOTL.ZG?downloadformat=excel Inflation, consumer prices (annual %)
+http://api.worldbank.org/v2/en/indicator/NY.GDP.DEFL.KD.ZG?downloadformat=excel Inflation, GDP deflator (annual %)
+http://api.worldbank.org/v2/en/indicator/BX.KLT.DINV.CD.WD?downloadformat=excel Adjusted net savings, including particulate emission damage (% of GNI)
 
-Educação
-http://api.worldbank.org/v2/es/indicator/SE.XPD.TOTL.GD.ZS?downloadformat=excel Gasto público en educación, total (% del PIB)
-http://api.worldbank.org/v2/es/indicator/SE.XPD.PRIM.PC.ZS?downloadformat=excel Gasto por alumno, nivel primario (% del PIB per cápita)
-http://api.worldbank.org/v2/es/indicator/SE.XPD.SECO.PC.ZS?downloadformat=excel Gasto por alumno, nivel secundario (% del PIB per cápita)
-http://api.worldbank.org/v2/es/indicator/SE.XPD.TERT.PC.ZS?downloadformat=excel Gasto por alumno, nivel terciario (% del PIB per cápita)
-http://api.worldbank.org/v2/es/indicator/SE.PRM.NENR?downloadformat=excel Inscripción escolar, nivel primario (% neto)
-http://api.worldbank.org/v2/es/indicator/SE.SEC.NENR?downloadformat=excel Inscripción escolar, nivel secundario (% neto)
-http://api.worldbank.org/v2/es/indicator/SE.TER.ENRR?downloadformat=excel Inscripción escolar, nivel terciario (% bruto)
-http://api.worldbank.org/v2/es/indicator/SE.PRM.TCAQ.ZS?downloadformat=excel Maestros capacitados en educación de nivel primario (% del total de maestros)
-http://api.worldbank.org/v2/es/indicator/SE.ADT.LITR.ZS?downloadformat=excel Tasa de alfabetización, total de adultos (% de personas de 15 años o más)
+Education
+http://api.worldbank.org/v2/en/indicator/SE.XPD.TOTL.GD.ZS?downloadformat=excel Government expenditure on education, total (% of GDP)
+http://api.worldbank.org/v2/en/indicator/SE.XPD.PRIM.PC.ZS?downloadformat=excel Government expenditure per student, primary (% of GDP per capita)
+http://api.worldbank.org/v2/en/indicator/SE.XPD.SECO.PC.ZS?downloadformat=excel Government expenditure per student, secondary (% of GDP per capita)
+http://api.worldbank.org/v2/en/indicator/SE.XPD.TERT.PC.ZS?downloadformat=excel Government expenditure per student, tertiary (% of GDP per capita)
+http://api.worldbank.org/v2/en/indicator/SE.PRM.NENR?downloadformat=excel School enrollment, primary (% net)
+http://api.worldbank.org/v2/en/indicator/SE.SEC.NENR?downloadformat=excel School enrollment, secondary (% net)
+http://api.worldbank.org/v2/es/indicator/SE.TER.ENRR?downloadformat=excel School enrollment, tertiary (% gross)
+http://api.worldbank.org/v2/en/indicator/SE.PRM.TCAQ.ZS?downloadformat=excel Trained teachers in primary education (% of total teachers)
+http://api.worldbank.org/v2/en/indicator/SE.ADT.LITR.ZS?downloadformat=excel Literacy rate, adult total (% of people ages 15 and above)
 
-Eficácia do auxílio
+Aid Effectiveness
+http://api.worldbank.org/v2/en/indicator/SH.STA.STNT.ZS?downloadformat=excel Prevalence of stunting, height for age (% of children under 5)
+http://api.worldbank.org/v2/en/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Primary completion rate, total (% of relevant age group)
+http://api.worldbank.org/v2/en/indicator/SI.DST.FRST.20?downloadformat=excel Income share held by lowest 20%
 
-http://api.worldbank.org/v2/es/indicator/SH.STA.STNT.ZS?downloadformat=excel Prevalencia de desnutrición, altura para la edad (% de niños menores de cinco años) 
-http://api.worldbank.org/v2/es/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Tasa de finalización de la educación de nivel primario, total (% del grupo etario correspondiente)
-http://api.worldbank.org/v2/es/indicator/SI.DST.FRST.20?downloadformat=excel Participación en el ingreso del 20% peor remunerado de la población  
+Environment
+http://api.worldbank.org/v2/en/indicator/NY.GDP.TOTL.RT.ZS?downloadformat=excel Total natural resources rents (% of GDP)
 
-Meio Ambiente
-http://api.worldbank.org/v2/es/indicator/NY.GDP.TOTL.RT.ZS?downloadformat=excel Total dos rendimentos dos recursos naturais (% do PIB)
-Pobreza
+Social Protection & Labor
+http://api.worldbank.org/v2/en/indicator/SL.UEM.TOTL.ZS?downloadformat=excel Unemployment, total (% of total labor force) (modeled ILO estimate)
 
-Proteção social e trabalho
-http://api.worldbank.org/v2/es/indicator/SL.UEM.TOTL.ZS?downloadformat=excel Desemprego, total (% da população ativa total) (estimativa modelada pela OIT)
+Financial Sector
+http://api.worldbank.org/v2/en/indicator/CM.MKT.LCAP.CD?downloadformat=excel Market capitalization of listed domestic companies (current US$)
+http://api.worldbank.org/v2/en/indicator/FS.AST.DOMS.GD.ZS?downloadformat=excel Domestic credit provided by financial sector (% of GDP)
+http://api.worldbank.org/v2/en/indicator/FR.INR.LEND?downloadformat=excel Lending interest rate (%)
+http://api.worldbank.org/v2/en/indicator/FR.INR.RINR?downloadformat=excel Real interest rate (%)
+http://api.worldbank.org/v2/es/indicator/CM.MKT.TRAD.GD.ZS?downloadformat=excel Stocks traded, total value (% of GDP)
+http://api.worldbank.org/v2/en/indicator/CM.MKT.LDOM.NO?downloadformat=excel Listed domestic companies, total
+http://api.worldbank.org/v2/en/indicator/FS.AST.PRVT.GD.ZS?downloadformat=excel Domestic credit to private sector (% of GDP)
+http://api.worldbank.org/v2/en/indicator/FM.LBL.BMNY.GD.ZS?downloadformat=excel Bank capital to assets ratio (%)
+http://api.worldbank.org/v2/en/indicator/FB.BNK.CAPA.ZS?downloadformat=excel Broad money (% of GDP)
+http://api.worldbank.org/v2/en/indicator/PA.NUS.FCRF?downloadformat=excel Official exchange rate (LCU per US$, period average)
 
-Setor financeiro
-http://api.worldbank.org/v2/es/indicator/CM.MKT.LCAP.CD?downloadformat=excel Capitalização no mercado de empresas nacionais listadas na bolsa de valores (USD a preços correntes) 
-2. http://api.worldbank.org/v2/es/indicator/FS.AST.DOMS.GD.ZS?downloadformat=excel Crédito interno fornecido pelo setor financeiro (% do PIB)
-http://api.worldbank.org/v2/es/indicator/FR.INR.LEND?downloadformat=excel Tasa de interés real (%)
-http://api.worldbank.org/v2/es/indicator/FR.INR.RINR?downloadformat=excel Taxa de juros ativa (%)
-http://api.worldbank.org/v2/es/indicator/FR.INR.LEND?downloadformat=excel Ações negociadas, valor total (% do PIB)
-http://api.worldbank.org/v2/es/indicator/CM.MKT.TRAD.GD.ZS?downloadformat=excel Empresas nacionais listadas na Bolsa, total
-http://api.worldbank.org/v2/es/indicator/CM.MKT.LDOM.NO?downloadformat=excel Crédito interno ao setor privado (% do PIB)
-http://api.worldbank.org/v2/es/indicator/FS.AST.PRVT.GD.ZS?downloadformat=excel Inflación, precios al consumidor (% anual)
-http://api.worldbank.org/v2/es/indicator/FP.CPI.TOTL.ZG?downloadformat=excel Masa monetaria (% del PIB)
-http://api.worldbank.org/v2/es/indicator/FM.LBL.BMNY.GD.ZS?downloadformat=excel Relação entre capital e ativos bancários (%)
-http://api.worldbank.org/v2/es/indicator/FB.BNK.CAPA.ZS?downloadformat=excel Relação entre capital e ativos bancários (%)
-http://api.worldbank.org/v2/es/indicator/PA.NUS.FCRF?downloadformat=excel Taxa de câmbio oficial (UMN por US $, média por um período)
-http://api.worldbank.org/v2/es/indicator/FI.RES.TOTL.CD?downloadformat=excel Total de reservas (incluye oro, US$ a precios actuales)
 
-Setor privado
-http://api.worldbank.org/v2/es/indicator/IC.REG.DURS?downloadformat=excel Tempo necessário para iniciar um negócio (dias)
-http://api.worldbank.org/v2/es/indicator/FS.AST.PRVT.GD.ZS?downloadformat=excel Crédito interno al sector privado (% del PIB)
-http://api.worldbank.org/v2/es/indicator/IC.BUS.NREG?downloadformat=excel Nuevas empresas registradas (número)
+Infrastructure
+http://api.worldbank.org/v2/en/indicator/IE.PPI.ENGY.CD?downloadformat=excel Investment in energy with private participation (current US$)
+http://api.worldbank.org/v2/en/indicator/IE.PPI.TRAN.CD?downloadformat=excel Investment in transport with private participation (current US$)
 
-Setor público
-http://api.worldbank.org/v2/es/indicator/IC.TAX.TOTL.CP.ZS?downloadformat=excel Taxa total de imposto (% dos lucros comerciais)
+Private Sector
+http://api.worldbank.org/v2/en/indicator/IC.REG.DURS?downloadformat=excel Time required to start a business (days)
+http://api.worldbank.org/v2/en/indicator/FS.AST.PRVT.GD.ZS?downloadformat=excel Domestic credit to private sector (% of GDP)
+http://api.worldbank.org/v2/en/indicator/IC.BUS.NREG?downloadformat=excel New businesses registered (number)
+
+Public Sector
+http://api.worldbank.org/v2/en/indicator/IC.TAX.TOTL.CP.ZS?downloadformat=excel Total tax rate (% of commercial profits)
