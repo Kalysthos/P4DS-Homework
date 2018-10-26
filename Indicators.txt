@@ -15,7 +15,6 @@ http://api.worldbank.org/v2/en/indicator/SP.URB.TOTL?downloadformat=excel Urban 
 http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=excel Population, total 
 http://api.worldbank.org/v2/en/indicator/EG.USE.ELEC.KH.PC?downloadformat=excel Electric power consumption (kWh per capita)
 http://api.worldbank.org/v2/en/indicator/SP.POP.GROW?downloadformat=excel Population growth (annual %)
-http://api.worldbank.org/v2/en/indicator/IC.BUS.EASE.XQ?downloadformat=excel Ease of doing business index (1=most business-friendly regulations)
 http://api.worldbank.org/v2/en/indicator/SP.URB.TOTL.IN.ZS?downloadformat=excel Urban population (% of total) 
 
 Science & Technology
@@ -26,7 +25,6 @@ http://api.worldbank.org/v2/en/indicator/GB.XPD.RSDV.GD.ZS?downloadformat=excel 
 Trade
 http://api.worldbank.org/v2/en/indicator/TG.VAL.TOTL.GD.ZS?downloadformat=excel Merchandise trade (% of GDP)
 http://api.worldbank.org/v2/en/indicator/TX.VAL.MMTL.ZS.UN?downloadformat=excel Ores and metals exports (% of merchandise exports)
-http://api.worldbank.org/v2/en/indicator/LP.LPI.OVRL.XQ?downloadformat=excel Logistics performance index: Overall (1=low to 5=high)
 http://api.worldbank.org/v2/en/indicator/ST.INT.XPND.MP.ZS?downloadformat=excel International tourism, expenditures (% of total imports)
 http://api.worldbank.org/v2/en/indicator/ST.INT.RCPT.XP.ZS?downloadformat=excel International tourism, receipts (% of total exports)
 http://api.worldbank.org/v2/en/indicator/NE.EXP.GNFS.ZS?downloadformat=excel Exports of goods and services (% of GDP)
@@ -65,7 +63,6 @@ http://api.worldbank.org/v2/en/indicator/SE.PRM.TCAQ.ZS?downloadformat=excel Tra
 http://api.worldbank.org/v2/en/indicator/SE.ADT.LITR.ZS?downloadformat=excel Literacy rate, adult total (% of people ages 15 and above)
 
 Aid Effectiveness
-http://api.worldbank.org/v2/en/indicator/SH.STA.STNT.ZS?downloadformat=excel Prevalence of stunting, height for age (% of children under 5)
 http://api.worldbank.org/v2/en/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Primary completion rate, total (% of relevant age group)
 http://api.worldbank.org/v2/en/indicator/SI.DST.FRST.20?downloadformat=excel Income share held by lowest 20%
 
@@ -83,14 +80,8 @@ http://api.worldbank.org/v2/en/indicator/FR.INR.RINR?downloadformat=excel Real i
 http://api.worldbank.org/v2/es/indicator/CM.MKT.TRAD.GD.ZS?downloadformat=excel Stocks traded, total value (% of GDP)
 http://api.worldbank.org/v2/en/indicator/CM.MKT.LDOM.NO?downloadformat=excel Listed domestic companies, total
 http://api.worldbank.org/v2/en/indicator/FS.AST.PRVT.GD.ZS?downloadformat=excel Domestic credit to private sector (% of GDP)
-http://api.worldbank.org/v2/en/indicator/FM.LBL.BMNY.GD.ZS?downloadformat=excel Bank capital to assets ratio (%)
 http://api.worldbank.org/v2/en/indicator/FB.BNK.CAPA.ZS?downloadformat=excel Broad money (% of GDP)
 http://api.worldbank.org/v2/en/indicator/PA.NUS.FCRF?downloadformat=excel Official exchange rate (LCU per US$, period average)
-
-
-Infrastructure
-http://api.worldbank.org/v2/en/indicator/IE.PPI.ENGY.CD?downloadformat=excel Investment in energy with private participation (current US$)
-http://api.worldbank.org/v2/en/indicator/IE.PPI.TRAN.CD?downloadformat=excel Investment in transport with private participation (current US$)
 
 Private Sector
 http://api.worldbank.org/v2/en/indicator/IC.REG.DURS?downloadformat=excel Time required to start a business (days)
