@@ -18,7 +18,6 @@ http://api.worldbank.org/v2/en/indicator/SP.POP.GROW?downloadformat=excel Popula
 http://api.worldbank.org/v2/en/indicator/SP.URB.TOTL.IN.ZS?downloadformat=excel Urban population (% of total) 
 
 Science & Technology
- http://api.worldbank.org/v2/en/indicator/IP.JRN.ARTC.SC?downloadformat=excel Scientific and technical journal articles
 http://api.worldbank.org/v2/en/indicator/TX.VAL.TECH.CD?downloadformat=excel High-technology exports (% of manufactured exports)
 http://api.worldbank.org/v2/en/indicator/GB.XPD.RSDV.GD.ZS?downloadformat=excel Research and development expenditure (% of GDP) 
 
@@ -64,7 +63,6 @@ http://api.worldbank.org/v2/en/indicator/SE.ADT.LITR.ZS?downloadformat=excel Lit
 
 Aid Effectiveness
 http://api.worldbank.org/v2/en/indicator/SE.PRM.CMPT.ZS?downloadformat=excel Primary completion rate, total (% of relevant age group)
-http://api.worldbank.org/v2/en/indicator/SI.DST.FRST.20?downloadformat=excel Income share held by lowest 20%
 
 Environment
 http://api.worldbank.org/v2/en/indicator/NY.GDP.TOTL.RT.ZS?downloadformat=excel Total natural resources rents (% of GDP)
