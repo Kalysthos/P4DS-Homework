@@ -1,8 +1,9 @@
-def analyze(data, ageorcountryorind, indice=False, log=False, disp=False):
+def analyze(data, ageorcountryorind, indice=False, rm=True, log=False, disp=False):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
     from sklearn import linear_model
+    countries = [i.replace("\n", "") for i in open("countries.txt")]
     if type(ageorcountryorind) == int:
         country,indices = pd.DataFrame(data[0]['Country Name']), ['Country']    
         for k,i in enumerate(data):
@@ -11,7 +12,7 @@ def analyze(data, ageorcountryorind, indice=False, log=False, disp=False):
             country.columns = indices
         country.index = country["Country"]
         country = country.drop("Country",1)
-        df,typ = country,"age"
+        df = country.reindex(countries) if rm else country
     
     elif ageorcountryorind[0:2] == "c-":
         ages = data[0]
@@ -25,7 +26,7 @@ def analyze(data, ageorcountryorind, indice=False, log=False, disp=False):
             i = i.drop("Country Name",1)
             indic += [data[k+1]["Indicator Name"][0]]
             ages = ages.join(i.T[ageorcountryorind[2:]][4:])
-        df,typ = ages,"coun"
+        df = ages.reindex(countries) if rm else ages
         
     else:
         for i in data:
@@ -33,7 +34,7 @@ def analyze(data, ageorcountryorind, indice=False, log=False, disp=False):
                 saida = i.drop(["Country Code", "Indicator Name", "Indicator Code"], axis=1)
                 saida.index = i['Country Name']
                 break
-        df,typ = saida.drop("Country Name",1), "ind"
+        df = saida.drop("Country Name",1).reindex(countries) if rm else saida
 
     if indice==False:
         return df
