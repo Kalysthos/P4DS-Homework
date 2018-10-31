@@ -24,15 +24,13 @@ def clean_tb(df,crt,by_count=True):
         A table to be cleaned
     data_critery_years : int
         Minimum number of data a contry must have to be kept in the Dataframe'''
-    col = [df[i][2] for i in df.columns]
-    df.columns = [int(i) if type(i) == np.float64 else i for i in col]
-    df = df.drop([0,1,2])
     df = df.dropna(axis = 1,how = 'all')
     if by_count:
-        df = df.dropna(thresh = crt)
+        df = df.dropna(thresh = crt+3)
     else:
         l_sequence = longest_seq_data(df)
         df = df.drop(index=[country for country in l_sequence.index if l_sequence(country) < crt])
+        
     df.index = list(df['Country Name'])
     df = df.drop(['Country Name'],axis=1)
     return df          
