@@ -5,7 +5,6 @@ http://api.worldbank.org/v2/en/indicator/NV.AGR.TOTL.ZS?downloadformat=excel Agr
 http://api.worldbank.org/v2/en/indicator/AG.PRD.FOOD.XD?downloadformat=excel Food production index (2004-2006 = 100)
 http://api.worldbank.org/v2/en/indicator/AG.LND.ARBL.HA.PC?downloadformat=excel Arable land (hectares per person)
 http://api.worldbank.org/v2/en/indicator/AG.SRF.TOTL.K2?downloadformat=excel Surface area (sq. km)
-http://api.worldbank.org/v2/en/indicator/AG.LND.TRAC.ZS?downloadformat=excel Agricultural machinery, tractors per 100 sq. km of arable land
 http://api.worldbank.org/v2/en/indicator/SP.RUR.TOTL.ZS?downloadformat=excel Rural population
 
 Climate Change
