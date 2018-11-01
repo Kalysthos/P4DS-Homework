@@ -9,6 +9,6 @@ freedom.columns = [2013]
 for k,i in enumerate(table_xls[1:]):
     ind = pd.DataFrame(pd.read_excel('Freedom/'+i)[i[5:9]+" Score"].append(pd.Series([0]), ignore_index=True).loc[:185])
     ind.columns=[2014+k]
-    freedom = freedom.join(ind)
+    freedom = freedom.join(ind, how="outer")
 freedom.index = names
 freedom = freedom.reindex(gdp).dropna(how='all')
