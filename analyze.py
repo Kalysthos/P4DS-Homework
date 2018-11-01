@@ -4,40 +4,32 @@ def analyze(data, ageorcountryorind, indice=False, rm=True, log=False, disp=Fals
     import matplotlib.pyplot as plt
     from sklearn import linear_model
     countries = [i.replace("\n", "") for i in open("countries.txt")]
+    
     if type(ageorcountryorind) == int:
-        country,indices = pd.DataFrame(data[0]['Country Name']), ['Country']    
-        for k,i in enumerate(data):
-            indices += [data[k]['Indicator Name'][0]]
-            country = country.join(i[str(ageorcountryorind)])
+        country, indices = pd.DataFrame(data[0][str(ageorcountryorind)]), [data[0]['Indicator Name'][0]]
+        for k,i in enumerate(data[1:]):
             country.columns = indices
-        country.index = country["Country"]
-        country = country.drop("Country",1)
+            indices += [data[k+1]["Indicator Name"][0]]
+            country = country.join(i[str(ageorcountryorind)])
         df = country.reindex(countries) if rm else country
     
     elif ageorcountryorind[0:2] == "c-":
-        ages = data[0]
-        coun = ages["Country Name"]
-        ages.index = coun
-        ages = ages.drop("Country Name",1)
-        ages, indic = pd.DataFrame(ages.T[ageorcountryorind[2:]][4:]), [data[0]["Indicator Name"][0]]
+        ages, indices = pd.DataFrame(data[0].T[ageorcountryorind[2:]][4:]), [data[0]["Indicator Name"][0]]
         for k,i in enumerate(data[1:]):
-            ages.columns = indic
-            i.index = coun
-            i = i.drop("Country Name",1)
-            indic += [data[k+1]["Indicator Name"][0]]
+            ages.columns = indices
+            indices += [data[k+1]["Indicator Name"][0]]
             ages = ages.join(i.T[ageorcountryorind[2:]][4:])
-        df = ages.reindex(countries) if rm else ages
+        df = ages
         
     else:
         for i in data:
             if i['Indicator Name'][0] == ageorcountryorind:
-                saida = i.drop(["Country Code", "Indicator Name", "Indicator Code"], axis=1)
-                saida.index = i['Country Name']
+                saida = i.drop("Indicator Name", axis=1)
                 break
-        df = saida.drop("Country Name",1).reindex(countries) if rm else saida
+        df = saida.reindex(countries) if rm else saida
 
     if indice==False:
-        return df
+        return df.dropna(how='all')
     elif log:
         df = np.log(df[indice].dropna()) 
         if disp:
