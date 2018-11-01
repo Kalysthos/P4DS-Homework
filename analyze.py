@@ -6,19 +6,19 @@ def analyze(data, ageorcountryorind, indice=False, rm=True, log=False, disp=Fals
     countries = [i.replace("\n", "") for i in open("countries.txt")]
     
     if type(ageorcountryorind) == int:
-        country, indices = pd.DataFrame(data[0][str(ageorcountryorind)]), [data[0]['Indicator Name'][0]]
+        country = pd.DataFrame(data[0][str(ageorcountryorind)])
+        country.columns = [data[0]['Indicator Name'][0]]
         for k,i in enumerate(data[1:]):
-            country.columns = indices
-            indices += [data[k+1]["Indicator Name"][0]]
-            country = country.join(i[str(ageorcountryorind)])
+            i = pd.Series(i[str(ageorcountryorind)], name=data[k+1]["Indicator Name"][0])
+            country = country.join(i)
         df = country.reindex(countries) if rm else country
     
     elif ageorcountryorind[0:2] == "c-":
-        ages, indices = pd.DataFrame(data[0].T[ageorcountryorind[2:]][4:]), [data[0]["Indicator Name"][0]]
+        ages = pd.DataFrame(data[0].T[ageorcountryorind[2:]][4:])
+        ages.columns = [data[0]["Indicator Name"][0]]
         for k,i in enumerate(data[1:]):
-            ages.columns = indices
-            indices += [data[k+1]["Indicator Name"][0]]
-            ages = ages.join(i.T[ageorcountryorind[2:]][4:])
+            i = pd.Series(i.T[ageorcountryorind[2:]][4:], name=data[k+1]["Indicator Name"][0])
+            ages = ages.join(i)
         df = ages
         
     else:
