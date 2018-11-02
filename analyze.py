@@ -1,4 +1,4 @@
-def analyze(data, ageorcountryorind, indice=False, rm=True, log=False, disp=False):
+def analyze(data, ageorcountryorind=2017, indice=False, rm=True, log=False, disp=False):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
