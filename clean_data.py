@@ -2,19 +2,21 @@ import pandas as pd
 import numpy as np
 import functools as f
 
-def clean_tb(df,crt,by_count=True):
-    '''\nCleans and organizes a given pandas.DataFrame df, removing the columns without data and filtering
-    the countries with a criterion.
+def clean_tb(df,min_data,criteria):
+    '''\nCleans and organizes a given pandas.DataFrame df, removing the columns without
+    data and filtering the countries with a criterion.
     Parameters:
     -----------
     df : pandas.Dataframe 
         A table to be cleaned.
-    data_critery_years : int
+    min_data : int
         Minimum number of data a contry must have to be kept in the Dataframe.
-    by_count : bool
-        If by_count is True, the criteria to be used to filter countries will be the number of years
-        that country contains non-null data. If it is False, the criterion will be the largest non-null 
-        data string in the country.'''
+    criteria : string
+        If the criterion is "counting," the criterion to be used to filter 
+        countries will be the number of years that the country contains
+        non-zero data. If it is 'string', the criterion will be the largest 
+        non-null data string in the country. If it is 'lasts', the criterion 
+        used will be the sequence from the last year.'''
     def longest_seq_data(data):
         '''\nReturns a pandas.Series containing the countries and the largest non-null data sequence length of each.
         Parameters:
@@ -35,11 +37,17 @@ def clean_tb(df,crt,by_count=True):
                 max_s.append(max(seq))
         return pd.Series(max_s,index=data.index)
     df = df.dropna(axis = 1,how = 'all')
-    if by_count:
-        df = df.dropna(thresh = crt+3)
-    else:
+    #df.columns = [int(i) if i.isnumeric() else i for i in df.columns]
+    if criteria == 'count':
+        df = df.dropna(thresh = min_data+3)
+    elif criteria == 'sequence':
         l_sequence = longest_seq_data(df)
-        df = df.drop(index=[country for country in l_sequence.index if l_sequence(country) < crt])
+        df = df.drop(index=[country for country in l_sequence.index if l_sequence(country) < min_data])
+    elif criteria == 'lasts':
+        last_year = max([i for i in df.columns if type(i) == int])
+        lasts = df[list(range(last_year-min_data+1,last_year+1))]
+        remain_index = lasts.dropna(how='any').index
+        df = df.drop(index = list(set(df.index) - set(remain_index)))
         
     df.index = list(df['Country Name'])
     df = df.drop(['Country Name'],axis=1)
