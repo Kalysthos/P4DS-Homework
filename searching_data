@@ -1,4 +1,13 @@
 def data_search(data,by,key):
+    '''\nReturns a table with specific data for a given year, country, or index.
+        Parameters
+        -----------
+        data : list
+            The list of DataFrames with the data.
+        by : {'year','index','country'}
+            Specifies the type of key to be used.
+        key : string
+            The keyword that must be used to find the data.'''
     def search_by_year(list_tables,year):
         l = []
         labels = []
@@ -34,3 +43,4 @@ def data_search(data,by,key):
         return search_by_year(data,key)
     elif by == 'index':
         return search_by_index(data,key)
+        
