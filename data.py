@@ -1,3 +1,5 @@
+'''Generate list of dataframes'''
+
 import pandas as pd
 
 table_links = [i for i in open('Indicators.txt').read().split() if i.startswith('htt')]
