@@ -1,4 +1,5 @@
 http://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=excel GDP per capita (current US$)
+http://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.KD.ZG?downloadformat=excel GDP per capita growth (annual %)
 
 Agriculture & Rural Development
 http://api.worldbank.org/v2/en/indicator/NV.AGR.TOTL.ZS?downloadformat=excel Agriculture, forestry, and fishing, value added (% of GDP)

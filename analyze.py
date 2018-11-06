@@ -1,4 +1,4 @@
-def analyze(data, ageorcountryorind=2017, indice=False, rm=True, log=False, disp=False):
+def analyze(data, ageorcountryorind, indice=False, rm=True, log=False, disp=False):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -6,15 +6,19 @@ def analyze(data, ageorcountryorind=2017, indice=False, rm=True, log=False, disp
     countries = [i.replace("\n", "") for i in open("countries.txt")]
     
     if type(ageorcountryorind) == int:
-        country = pd.DataFrame(data[0][str(ageorcountryorind)], columns=[data[0]['Indicator Name'][0]])
+        country = pd.DataFrame(data[0][str(ageorcountryorind)])
+        country.columns = [data[0]['Indicator Name'][0]]
         for k,i in enumerate(data[1:]):
-            country = country.join(pd.Series(i[str(ageorcountryorind)], name=data[k+1]["Indicator Name"][0]))
+            i = pd.Series(i[str(ageorcountryorind)], name=data[k+1]["Indicator Name"][0])
+            country = country.join(i)
         df = country.reindex(countries) if rm else country
     
     elif ageorcountryorind[0:2] == "c-":
-        ages = pd.DataFrame(data[0].T[ageorcountryorind[2:]][4:], columns=[data[0]["Indicator Name"][0]])
+        ages = pd.DataFrame(data[0].T[ageorcountryorind[2:]][4:])
+        ages.columns = [data[0]["Indicator Name"][0]]
         for k,i in enumerate(data[1:]):
-            ages = ages.join(pd.Series(i.T[ageorcountryorind[2:]][4:], name=data[k+1]["Indicator Name"][0]))
+            i = pd.Series(i.T[ageorcountryorind[2:]][4:], name=data[k+1]["Indicator Name"][0])
+            ages = ages.join(i)
         df = ages
         
     else:
@@ -52,4 +56,3 @@ def analyze(data, ageorcountryorind=2017, indice=False, rm=True, log=False, disp
             plt.show()
         else:
             return df
-        
