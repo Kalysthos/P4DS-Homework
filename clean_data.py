@@ -2,28 +2,38 @@ import pandas as pd
 import numpy as np
 import functools as f
 
-def longest_seq_data(data):
-    max_s = []
-    for i in data.T:
-        index = data.T[i].isnull()
-        nans = data.T[index].index.values
-        fnans = np.concatenate((np.array([-1]),nans-1960))
-        lnans = np.concatenate((nans-1960,np.array([len(data.columns)-3])))
-        seq = lnans-fnans-1
-        if len(nans)==0:
-            max_s.append(len(data.columns)-3)
-        else:
-            max_s.append(max(seq))
-    return pd.Series(max_s,index=data.index)
-
 def clean_tb(df,crt,by_count=True):
-    '''\nDocstring for clear_tb
+    '''\nCleans and organizes a given pandas.DataFrame df, removing the columns without data and filtering
+    the countries with a criterion.
     Parameters:
     -----------
-    df : pandas Dataframe 
-        A table to be cleaned
+    df : pandas.Dataframe 
+        A table to be cleaned.
     data_critery_years : int
-        Minimum number of data a contry must have to be kept in the Dataframe'''
+        Minimum number of data a contry must have to be kept in the Dataframe.
+    by_count : bool
+        If by_count is True, the criteria to be used to filter countries will be the number of years
+        that country contains non-null data. If it is False, the criterion will be the largest non-null 
+        data string in the country.'''
+    def longest_seq_data(data):
+        '''\nReturns a pandas.Series containing the countries and the largest non-null data sequence length of each.
+        Parameters:
+        -----------
+        data : pandas.DataFrame
+            A table with the data to be counted.'''
+
+        max_s = []
+        for i in data.T:
+            index = data.T[i].isnull()
+            nans = data.T[index].index.values
+            fnans = np.concatenate((np.array([-1]),nans-1960))
+            lnans = np.concatenate((nans-1960,np.array([len(data.columns)-3])))
+            seq = lnans-fnans-1
+            if len(nans)==0:
+                max_s.append(len(data.columns)-3)
+            else:
+                max_s.append(max(seq))
+        return pd.Series(max_s,index=data.index)
     df = df.dropna(axis = 1,how = 'all')
     if by_count:
         df = df.dropna(thresh = crt+3)
@@ -33,35 +43,4 @@ def clean_tb(df,crt,by_count=True):
         
     df.index = list(df['Country Name'])
     df = df.drop(['Country Name'],axis=1)
-    return df          
-
-def data_search(data,by,key):
-    def search_by_year(list_tables,year):
-        l = []
-        labels = []
-
-        for i in list_tables:
-            if year in i.columns:
-                l.append(pd.DataFrame(i[year]))
-                df = f.reduce(lambda a,b: a.join(b,how='outer',rsuffix=i['Indicator Code'][0]),l)
-                l = [df]
-                labels.append(i['Indicator Name'][0])
-        df.columns = labels
-        return df
-    
-    def search_by_country(list_tables,country):
-        l = []
-        labels = []
-        for i in list_tables:
-            if country in i.index:
-                l.append(pd.DataFrame(i.T[country]))
-                df = f.reduce(lambda a,b: a.join(b,how='outer',rsuffix=i['Indicator Code'][0]),l)
-                l = [df]
-                labels.append(i['Indicator Name'][0])
-        df.columns = labels
-        return df.drop(['Country Code','Indicator Name','Indicator Code'])
-
-    if by == 'country':
-        return search_by_country(data,key)
-    elif by == 'year':
-        return search_by_country(data,key)
+    return df
