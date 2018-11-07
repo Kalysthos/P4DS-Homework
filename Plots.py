@@ -1,3 +1,8 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+    
 def scatter(data, age, index1, index2):
     '''Generates scatter plot and trend line in comparison between two indices in a given year''''
 
