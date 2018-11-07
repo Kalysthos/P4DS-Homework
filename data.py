@@ -1,4 +1,4 @@
-'''Generate list of dataframes'''
+'''Generate list of dataframes of World Bank data'''
 
 import pandas as pd
 
