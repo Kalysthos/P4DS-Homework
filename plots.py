@@ -76,6 +76,8 @@ def trend_years(data, country, indexes, years, plot=True):
         plt.show() 
         
 def comparison_filter(data, year=2014, years=[2000,2014], country="World", index='GDP per capita (current US$)', r2=0.45, coef=0.05, num=10):
+    '''Generates index graphs that match the index and criteria provided'''
+    
     indcoef = trend_years(data, country, index, years, False)[1]
     for ind in analyze(data, year).columns.drop(index):
         try:
