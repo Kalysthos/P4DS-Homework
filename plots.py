@@ -28,7 +28,7 @@ def trend(data, country, index, years):
     '''Generates the trend over the years (list of ints) of the countries (list of strs) and requested index (str)'''
     
     for i in country:
-        plt.plot(analyze(data, "c-"+i, False)[index].loc[[str(i) for i in range(years[0], years[1]+1)]])
+        plt.plot(analyze(data, "c-"+i)[index].loc[[str(i) for i in range(years[0], years[1]+1)]])
     plt.legend(country)
     plt.title('Tendency')
     plt.setp(plt.xticks()[1], rotation=90)
@@ -39,7 +39,7 @@ def trend(data, country, index, years):
 def lmh(data, year, index, x):
     '''Generates the x (int) smaller, middle and higher values for the indicated year (int) and index (str)'''
     
-    df = analyze(data, year)[index].dropna().sort_values()
+    df = analyze(data, year).drop("World", 0)[index].dropna().sort_values()
     amount = int(len(df)/2)-int(x/2)
     df.iloc[list(range(0,x))+list(range(amount, amount+x))+list(range(-x,0))].plot(kind="bar")
     plt.title('Bar plot')
@@ -51,7 +51,7 @@ def trend_years(data, country, indexes, years, plot=True):
     '''Generates the trend line or the r squared, coefficient and number of countries (plot=False) of the years (list of ints) of the country (str) and the requested index (str)'''
     
     if type(indexes) == str:
-        df = analyze(data, "c-"+country, False)[indexes].loc[[str(i) for i in range(years[0], years[1]+1)]].dropna()
+        df = analyze(data, "c-"+country)[indexes].loc[[str(i) for i in range(years[0], years[1]+1)]].dropna()
         x = np.array(df.index).reshape(-1, 1)
         y = preprocessing.MinMaxScaler().fit_transform(np.array(df.values, dtype="float64").reshape(-1, 1))
         model = linear_model.LinearRegression().fit(x, y)
