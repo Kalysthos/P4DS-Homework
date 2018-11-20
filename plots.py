@@ -67,7 +67,7 @@ def trend_years(data, country, indexes, years, plot=True):
             plt.plot(df.index, y)
             plt.legend(["R**2 = {:0.4}".format(r2), "Coef = {:0.4}".format(z[0])])
             plt.title('Tendency line')
-            plt.setp(plt.xticks()[1], rotation=90)
+            plt.setp(plt.xticks()[1], rotation=60)
             plt.xlabel('Years')
             plt.ylabel(indexes)
             plt.show()
