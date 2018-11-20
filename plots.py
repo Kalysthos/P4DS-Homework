@@ -2,27 +2,30 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from analyze import analyze 
-from sklearn import linear_model, preprocessing
+from sklearn import metrics, preprocessing
+cube = lambda x: x**(1/3) if x.min() >=0 else -abs(x)**(1/3)
     
 def scatter(data, year, indexes, plot=True):
     '''Generates scatter plot and trend line or the r squared, coefficient and number of countries (plot=False) in comparison between two indexes (list of strs) in a given year (int)'''
 
-    df = np.array(analyze(data, year)[indexes].dropna())
-    df = np.log(df) if df.min() > 0 else np.log(df + 1 - df.min())
-    y = df[:,0].reshape(-1, 1)
-    x = df[:,1].reshape(-1, 1)
-    model = linear_model.LinearRegression().fit(x, y)
+    df0 = np.array(analyze(data, year)[indexes].dropna())
+    df = np.log(df0) if df0.min() > 0 else cube(df0)
+    x = df[:,0]
+    y = df[:,1]
+    z = np.polyfit(x, y, 1)
+    p = np.poly1d(z)
+    r2 = metrics.r2_score(y, p(x))
     if plot:
-        plt.plot(x, model.predict(x), color='red', linewidth=2.)
-        plt.scatter(y=y, x=x, color='blue', s=50, alpha=.5)
-        plt.legend(["R**2 = {:0.4}".format(model.score(x, y))])
-        plt.title('Tendency line log-log')
+        plt.plot(x, p(x), color='red', linewidth=2.)
+        plt.scatter(x, y, color='blue', s=50, alpha=.5)
+        plt.legend(["R**2 = {:0.4}".format(r2)])
+        plt.title('Tendency line {}'.format("log-log" if df0.min() > 0 else "cubic root - cubic root"))
         plt.xlabel(indexes[0])
         plt.ylabel(indexes[1])
         plt.show()
         
     else:
-        return model.score(x, y), model.coef_[0][0], len(x)
+        return r2, z[0], len(x)
     
 def trend(data, country, index, years):
     '''Generates the trend over the years (list of ints) of the countries (list of strs) and requested index (str)'''
@@ -31,7 +34,7 @@ def trend(data, country, index, years):
         plt.plot(analyze(data, "c-"+i)[index].loc[[str(i) for i in range(years[0], years[1]+1)]])
     plt.legend(country)
     plt.title('Tendency')
-    plt.setp(plt.xticks()[1], rotation=90)
+    plt.setp(plt.xticks()[1], rotation=60)
     plt.xlabel('Years')
     plt.ylabel(index)
     plt.show()
@@ -52,13 +55,15 @@ def trend_years(data, country, indexes, years, plot=True):
     
     if type(indexes) == str:
         df = analyze(data, "c-"+country)[indexes].loc[[str(i) for i in range(years[0], years[1]+1)]].dropna()
-        x = np.array(df.index).reshape(-1, 1)
-        y = preprocessing.MinMaxScaler().fit_transform(np.array(df.values, dtype="float64").reshape(-1, 1))
-        model = linear_model.LinearRegression().fit(x, y)
+        x = np.array(df.index, dtype="float64")
+        y = preprocessing.MinMaxScaler().fit_transform(np.array(df.values, dtype="float64").reshape(-1, 1)).reshape(-1)
+        z = np.polyfit(x, y, 1)
+        p = np.poly1d(z)
+        r2 = metrics.r2_score(y, p(x))
         if plot:
-            plt.plot([i[0] for i in x], model.predict(x),color='red', linewidth=2.)
-            plt.plot([i[0] for i in x],[i[0] for i in y])
-            plt.legend(["R**2 = {:0.4}".format(model.score(x, y)), "Coef = {:0.4}".format(model.coef_[0][0])])
+            plt.plot(x, p(x),color='red', linewidth=2.)
+            plt.plot(x, y)
+            plt.legend(["R**2 = {:0.4}".format(r2), "Coef = {:0.4}".format(z[0])])
             plt.title('Tendency line')
             plt.setp(plt.xticks()[1], rotation=90)
             plt.xlabel('Years')
@@ -66,10 +71,10 @@ def trend_years(data, country, indexes, years, plot=True):
             plt.show()
 
         else:
-            return model.score(x, y), model.coef_[0][0], len(x)
+            return r2, z[0], len(x)
     else:
         for ind in indexes:
-            df = analyze(data, "c-"+country, False)[ind].loc[[str(i) for i in range(years[0], years[1]+1)]].dropna()
+            df = analyze(data, "c-"+country)[ind].loc[[str(i) for i in range(years[0], years[1]+1)]].dropna()
             plt.plot(df.index, preprocessing.MinMaxScaler().fit_transform(np.array(df.values, dtype="float64").reshape(-1, 1)))
         plt.legend(indexes)
         plt.setp(plt.xticks()[1], rotation=90)

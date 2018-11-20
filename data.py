@@ -18,7 +18,7 @@ for k,i in enumerate(table_xls2[1:]):
     freedom = freedom.join(pd.DataFrame(pd.read_excel('Freedom/'+i)[i[5:9]+" Score"].append(pd.Series([0]), ignore_index=True).loc[:185], columns=[str(2014+k)]), how="outer")
     
 freedom.index = fnames
-freedom = freedom.reindex(countries).dropna(how='all').join(pd.DataFrame(columns=['Indicator Name'] + [str(i) for i in range(1960,2013)]))[["Indicator Name"]+[str(i) for i in range(1960,2018)]]
+freedom = freedom.join(pd.DataFrame(columns=['Indicator Name'] + [str(i) for i in range(1960,2013)]))[["Indicator Name"]+[str(i) for i in range(1960,2018)]]
 freedom["Indicator Name"][freedom["Indicator Name"].isnull()] = "Economic freedom"
 
-data[-1] = freedom
+data[-1] = data[0][["Indicator Name"]].rename(columns=lambda x: 0).join(freedom).drop(0, 1)
