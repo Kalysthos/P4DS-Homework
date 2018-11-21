@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from analyze import analyze 
 from sklearn import linear_model, preprocessing
-sublog = lambda x: np.log(x) if x > 0 else -np.log(abs(x)) if x < 0 else None
-log = lambda x: np.array([sublog(i) for i in x])
+subcube = lambda x: x**(1/3) if x >= 0 else -abs(x)**(1/3)
+cube = lambda x: np.array([subcube(i) for i in x])
     
 def scatter(data, year, indexes, plot=True):
     '''Generates scatter plot and trend line or the r squared, coefficient and number of countries (plot=False) in comparison between two indexes (list of strs) in a given year (int)'''
@@ -13,14 +13,15 @@ def scatter(data, year, indexes, plot=True):
         df = np.array(analyze(data, year)[indexes].dropna())
     else:
         df = np.array(analyze(data, year[0])[[indexes[0]]].join(analyze(data, year[1])[indexes[1]]).dropna())
-    x = log(df[:,0]).reshape(-1, 1)
-    y = log(df[:,1]).reshape(-1, 1)
+    func = np.log if df.min() > 0 else cube
+    x = func(df[:,0]).reshape(-1, 1)
+    y = func(df[:,1]).reshape(-1, 1)
     model = linear_model.LinearRegression().fit(x, y)
     if plot:
         plt.plot(x, model.predict(x), color='red', linewidth=2.)
         plt.scatter(x, y, color='blue', s=50, alpha=.5)
         plt.legend(["R**2 = {:0.4}".format(model.score(x, y))])
-        plt.title('Tendency line log-log')
+        plt.title('Tendency line for log or root cube')
         plt.xlabel(indexes[0])
         plt.ylabel(indexes[1])
         plt.show()
