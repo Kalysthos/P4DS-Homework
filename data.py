@@ -21,4 +21,4 @@ freedom.index = fnames
 freedom = freedom.append(pd.Series(freedom.mean(), name="World")).join(pd.DataFrame(columns=['Indicator Name'] + [str(i) for i in range(1960,2013)]))[["Indicator Name"]+[str(i) for i in range(1960,2018)]]
 freedom["Indicator Name"][freedom["Indicator Name"].isnull()] = "Economic freedom"
 
-data[-1] = data[0][["Indicator Name"]].rename(columns=lambda x: 0).join(freedom.drop('Korea, Rep.', 0)).drop(0, 1)
+data[-1] = data[0][["Indicator Name"]].rename(columns=lambda x: 0).join(freedom).drop(0, 1)

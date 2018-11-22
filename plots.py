@@ -3,15 +3,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 from analyze import analyze 
 from sklearn import linear_model, preprocessing
+def remove_outliers(data):
+    m = 2
+    while True:
+        noout = data[abs(data - np.mean(data)) < m * np.std(data)].dropna()
+        if data.shape[0] <= 40/39*noout.shape[0]:
+            break
+        m += 1
+    return noout
     
 def scatter(data, year, indexes, plot=True):
     '''Generates scatter plot and trend line or the r squared, coefficient and number of countries (plot=False) in comparison between two indexes (list of strs) in a given year (int)'''
     
     if type(year) == int:
-        df = np.array(analyze(data, year)[indexes].dropna())
+        df = analyze(data, year)[indexes].dropna()
     else:
-        df = np.array(analyze(data, year[0])[[indexes[0]]].join(analyze(data, year[1])[indexes[1]]).dropna())
-        
+        df = analyze(data, year[0])[[indexes[0]]].join(analyze(data, year[1])[indexes[1]]).dropna()
+    
+    df = np.array(remove_outliers(df))
     x = df[:,0].reshape(-1, 1)
     y = df[:,1].reshape(-1, 1)
     xlist = [(x, "x"), (np.log(x), "log(x)")] if x.min() > 0 else [(x, "x")]
@@ -30,7 +39,7 @@ def scatter(data, year, indexes, plot=True):
         plt.plot(x, model.predict(x), color='red', linewidth=2.)
         plt.scatter(x, y, color='blue', s=50, alpha=.5)
         plt.legend(["R**2 = {:0.4}".format(r2)])
-        plt.title('Tendency line {} X {}'.format(leix, leiy))
+        plt.title('Tendency line {} - {}'.format(leix, leiy))
         plt.xlabel(indexes[0])
         plt.ylabel(indexes[1])
         plt.show()
