@@ -3,12 +3,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 from analyze import analyze 
 from sklearn import linear_model, preprocessing
-def remove_outliers(x, y):
-    for m in range(2, 10):
-        model = linear_model.LinearRegression().fit(x, y)
-        dist = abs(y - model.predict(x))
-        std = abs(dist - dist.mean()) < m * np.std(dist)
-        if std.sum() > 0.975*x.shape[0]:
+
+class divid:
+    def __init__(self, x, n):
+        self.range, self.cut = np.arange(x), [None]*n
+        for i in range(n):
+            self.cut[i] = x//n*i + np.arange(x//n + 1 if x%n - i > 0 else x//n)     
+    def split(self, n):
+        return np.setdiff1d(self.range, self.cut[n])
+    
+def findlinear(x, y, div=10):
+    order = np.random.permutation(x.shape[0])
+    x, y = x[order], y[order]
+    split = divid(x.shape[0], div)
+    r2 = 0
+    for i in range(div):
+        index = split.split(i)
+        xtest, ytest = x[index], y[index]
+        modeltest = linear_model.LinearRegression().fit(xtest, ytest)
+        r2test = modeltest.score(xtest,ytest)
+        if r2test > r2:
+            r2, model = r2test, modeltest
+    return model
+
+def remove_outliers(x, y, percent=2.5):
+    model = findlinear(x, y)
+    dist = abs(y - model.predict(x))
+    desv = abs(dist - dist.mean())/np.std(dist)
+    part = (100-percent)/100*x.shape[0]
+    for m in np.arange(2., 5., 0.1):
+        std = desv < m 
+        if std.sum() > part:
             return x[std].reshape(-1, 1), y[std].reshape(-1, 1)
     
 def scatter(data, year, indexes, plot=True):
