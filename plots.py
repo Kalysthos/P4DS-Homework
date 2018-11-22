@@ -3,35 +3,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 from analyze import analyze 
 from sklearn import linear_model, preprocessing
-def remove_outliers(data):
-    m = 2
-    while True:
-        noout = data[abs(data - np.mean(data)) < m * np.std(data)].dropna()
-        if data.shape[0] <= 40/39*noout.shape[0]:
-            break
-        m += 1
-    return noout
+def remove_outliers(x, y):
+    for m in range(2, 10):
+        model = linear_model.LinearRegression().fit(x, y)
+        dist = abs(y - model.predict(x))
+        std = abs(dist - dist.mean()) < m * np.std(dist)
+        if std.sum() > 0.975*x.shape[0]:
+            return x[std].reshape(-1, 1), y[std].reshape(-1, 1)
     
 def scatter(data, year, indexes, plot=True):
     '''Generates scatter plot and trend line or the r squared, coefficient and number of countries (plot=False) in comparison between two indexes (list of strs) in a given year (int)'''
     
     if type(year) == int:
-        df = analyze(data, year)[indexes].dropna()
+        df = np.array(analyze(data, year)[indexes].dropna())
     else:
-        df = analyze(data, year[0])[[indexes[0]]].join(analyze(data, year[1])[indexes[1]]).dropna()
+        df = np.array(analyze(data, year[0])[[indexes[0]]].join(analyze(data, year[1])[indexes[1]]).dropna())
     
-    df = np.array(remove_outliers(df))
+    if df.shape[0] < 20:
+        raise ValueError('Without enough data')
+        
     x = df[:,0].reshape(-1, 1)
     y = df[:,1].reshape(-1, 1)
-    xlist = [(x, "x"), (np.log(x), "log(x)")] if x.min() > 0 else [(x, "x")]
-    ylist = [(y, "y"), (np.log(y), "log(y)")] if y.min() > 0 else [(y, "y")]
+    xlist = [(np.log(x), "log(x)"), (x, "x")] if x.min() > 0 else [(x, "x")]
+    ylist = [(np.log(y), "log(y)"), (y, "y")] if y.min() > 0 else [(y, "y")]
     r2 = 0
     for i in xlist:
         for k in ylist:
-            modeltest = linear_model.LinearRegression().fit(i[0], k[0])
-            r2test = modeltest.score(i[0], k[0])
+            xin, yin = remove_outliers(i[0], k[0])
+            modeltest = linear_model.LinearRegression().fit(xin, yin)
+            r2test = modeltest.score(xin, yin)
             if r2test > r2:
-                x, y = i[0], k[0]
+                x, y = xin, yin
                 leix, leiy = i[1], k[1]
                 model, r2 = modeltest, r2test
                     
