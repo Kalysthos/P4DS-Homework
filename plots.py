@@ -31,7 +31,7 @@ def remove_outliers(x, y, percent=2.5):
     dist = abs(y - model.predict(x))
     desv = abs(dist - dist.mean())/np.std(dist)
     part = (100-percent)/100*x.shape[0]
-    for m in np.arange(2., 5., 0.1):
+    for m in np.arange(2., 5., 0.25):
         std = desv < m 
         if std.sum() > part:
             return x[std].reshape(-1, 1), y[std].reshape(-1, 1)
@@ -72,7 +72,7 @@ def scatter(data, year, indexes, plot=True):
         plt.show()
         
     else:
-        return r2, model.coef_[0][0], len(x)
+        return r2, model.coef_[0][0], x.shape[0]
     
 def trend(data, country, index, years):
     '''Generates the trend over the years (list of ints) of the countries (list of strs) and requested index (str)'''
