@@ -1,5 +1,7 @@
 import numpy as np
-from sklearn import linear_model
+from sklearn import linear_model, preprocessing
+
+norm = lambda x: preprocessing.MinMaxScaler().fit_transform(x)
 
 class divid:
     def __init__(self, x, n):
@@ -43,8 +45,8 @@ def scatter(data, years, indexes, plot=False):
         
     x = df[:,0].reshape(-1, 1)
     y = df[:,1].reshape(-1, 1)
-    xlist = [(np.log(x), "log(x)"), (x, "x")] if x.min() > 0 else [(x, "x")]
-    ylist = [(np.log(y), "log(y)"), (y, "y")] if y.min() > 0 else [(y, "y")]
+    xlist = [(norm(np.log(x)), "log(x)"), (norm(x), "x")] if x.min() > 0 else [(norm(x), "x")]
+    ylist = [(norm(np.log(y)), "log(y)"), (norm(y), "y")] if y.min() > 0 else [(norm(y), "y")]
     r2 = 0
     for i in xlist:
         for k in ylist:
