@@ -35,7 +35,7 @@ def remove_outliers(x, y, percent=5):
     
 def scatter(data, years, indexes, plot=False):
     
-    df = np.append(np.array(data.loc[indexes[0]][str(years[0])]).reshape(-1, 1), np.array(data.loc[indexes[1]][str(years[1])]).reshape(-1, 1), axis=1)
+    df = np.append(np.array(data.loc[(indexes[0]), [str(years[0])]]).reshape(-1, 1), np.array(data.loc[indexes[1]][str(years[1])]).reshape(-1, 1), axis=1)
     df = df[~np.any(np.isnan(df), axis=1), :]
     
     if df.shape[0] < 20:
