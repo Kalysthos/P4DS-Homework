@@ -1,40 +1,50 @@
 import numpy as np
 from sklearn import linear_model, preprocessing
 
-norm = lambda x: preprocessing.MinMaxScaler().fit_transform(x)
-cube = lambda x: x**(1/3) if x >= 0 else -abs(x)**(1/3)
+norm = lambda array: preprocessing.MinMaxScaler().fit_transform(array)
+cuberoot = lambda array: np.array([value**(1/3) if value >= 0 else -abs(value)**(1/3) for value in array])
 
-class divid:
-    def __init__(self, x, n):
-        self.x, self.cut = x, [None]*n
-        for i in range(n):
-            self.cut[i] = x//n*i + np.arange(x//n + 1 if x%n - i > 0 else x//n)     
-    def split(self, n):
-        return np.setdiff1d(np.arange(self.x), self.cut[n])
+class divider:
+    '''Create an object to get ordered parts of an array'''
     
-def findlinear(x, y, div=10):
+    def __init__(self, length, parts):
+        self.length, self.cut = length, [None]*parts
+        for part in range(parts):
+            self.cut[part] = length//parts*part + np.arange(length//parts + 1 if length%parts - part > 0 else length//parts)   
+            
+    def split(self, part):
+        return np.setdiff1d(np.arange(self.length), self.cut[part])
+    
+def findlinear(x, y, parts):
+    '''Find the model that best fits the data without a part'''
+    
     np.random.seed(0)
     order = np.random.permutation(x.shape[0])
     x, y = x[order], y[order]
-    split = divid(x.shape[0], div)
+    split = divider(x.shape[0], parts)
     r2 = 0
-    for i in range(div):
-        index = split.split(i)
+    
+    for part in range(parts):
+        index = split.split(part)
         xtest, ytest = x[index], y[index]
         modeltest = linear_model.LinearRegression().fit(xtest, ytest)
         r2test = modeltest.score(xtest,ytest)
-        if r2test > r2:
+        if r2test >= r2:
             r2, model = r2test, modeltest
+            
     return model
 
-def remove_outliers(x, y, percent=2.5):
-    model = findlinear(x, y)
-    dist = abs(y - model.predict(x))
-    desv = abs(dist - dist.mean())/np.std(dist) if np.std(dist).dtype == 'float64' and np.std(dist) != 0 else dist - dist
+def remove_outliers(x, y, percent=2.5, parts = 10):
+    '''Remove possible outliers'''
+    
+    model = findlinear(x, y, parts)
+    distance = abs(y - model.predict(x))
+    distance.dtype = 'float64'
+    deviation = abs(distance - distance.mean())/np.std(distance) if np.std(distance) != 0 else distance*0
     part = (100-percent)/100*x.shape[0]
-    for m in np.arange(2., 5., 0.25):
-        std = desv < m 
-        if std.sum() > part:
+    for multiplier in np.arange(2., 5., 0.25):
+        std = deviation < multiplier 
+        if std.sum() >= part:
             return std
     
 def scatter(data, years, indexes, plot=False):
@@ -46,19 +56,20 @@ def scatter(data, years, indexes, plot=False):
         
     x = np.array(df['0']).reshape(-1, 1)
     y = np.array(df[str(years[1])]).reshape(-1, 1)
-    xlist = [(norm(np.log(x)), "log(x)"), (norm(x), "x")] if x.min() > 0 else [(norm(cube(x)), "x**(1/3)"), (norm(x), "x")]
-    ylist = [(norm(np.log(y)), "log(y)"), (norm(y), "y")] if y.min() > 0 else [(norm(cube(y)), "y**(1/3)"), (norm(y), "y")]
+    xlist = [(norm(np.log(x)), "log(x)") if x.min() > 0 else (norm(cuberoot(x)), "x**(1/3)"), (norm(x), "x")]
+    ylist = [(norm(np.log(y)), "log(y)") if y.min() > 0 else (norm(cuberoot(y)), "y**(1/3)"), (norm(y), "y")]
     r2 = 0
-    for i in xlist:
-        for k in ylist:
-            stdtest = remove_outliers(i[0], k[0])
-            xin, yin = i[0][stdtest].reshape(-1, 1), k[0][stdtest].reshape(-1, 1)
+    
+    for xitem in xlist:
+        for yitem in ylist:
+            stdtest = remove_outliers(xitem[0], yitem[0])
+            xin, yin = xitem[0][stdtest].reshape(-1, 1), yitem[0][stdtest].reshape(-1, 1)
             modeltest = linear_model.LinearRegression().fit(xin, yin)
             r2test = modeltest.score(xin, yin)
             if r2test >= r2:
                 std = stdtest
-                x, y = i[0], k[0]
-                leix, leiy = i[1], k[1]
+                x, leix = xitem
+                y, leiy = yitem
                 model, r2 = modeltest, r2test
                     
     if plot:
@@ -67,38 +78,34 @@ def scatter(data, years, indexes, plot=False):
         
         trace = go.Scatter(
             name = 'Inliers',
-            x = x[std],
-            y = y[std],
+            x = x[std], y = y[std],
             text = np.array(df.index).reshape(-1, 1)[std],
             mode = 'markers',
             marker = dict(
                 size = 10,
                 color = 'blue',
-                opacity = 0.5,
+                opacity = 0.5
             )
         )
         
         outliers = go.Scatter(
             name = 'Outliers',
-            x = x[~std],
-            y = y[~std],
+            x = x[~std], y = y[~std],
             text = np.array(df.index).reshape(-1, 1)[~std],
             mode = 'markers',
             marker = dict(
                 size = 10,
                 color = 'orange',
-                opacity = 0.5,
+                opacity = 0.5
             )
         )
         
         scale = np.array([x.min(), x.max()]).reshape(-1, 1)
         line = go.Scatter(
             name = 'Trend line',
-            x = scale,
-            y = model.predict(scale),
+            x = scale, y = model.predict(scale),
             mode='lines',
-            line=dict(color = 'red', width = 2.5,
-            )
+            line=dict(color = 'red', width = 2.5)
         )
         
         layout = go.Layout(
