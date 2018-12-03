@@ -34,7 +34,7 @@ def findlinear(x, y, parts):
             
     return model
 
-def remove_outliers(x, y, percent=2.5, parts = 10):
+def remove_outliers(x, y, percent=2.5, parts=10):
     '''Remove possible outliers'''
     
     model = findlinear(x, y, parts)
