@@ -90,7 +90,7 @@ def xsml(data, indexes, year, X):
     
 def trend_years(data, indexes, country, years, plot=True):
     '''
-    Trend graph for a given country and time period of any set of indexes or an index with its trend line. Or a tuple with the details of the trend line
+    Generates a trend graph for a given country and time period of any set of indexes or an index with its trend line. Or a tuple with the details of the trend line
     
     Parameters:
     -----------
@@ -104,7 +104,7 @@ def trend_years(data, indexes, country, years, plot=True):
     Return:
     -------
         
-        matplotlib.pyplot.plot with the trend graph or a tuple with R-Square, coefficient and number of countries in the index trend line analysis
+        matplotlib.pyplot.plot with the trend graph or a tuple with R-Square, trend line coefficient and the number of countries in the analysis
         
     Examples:
     ---------

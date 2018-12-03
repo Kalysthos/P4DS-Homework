@@ -47,7 +47,32 @@ def remove_outliers(x, y, percent=2.5, parts=10):
         if std.sum() >= part:
             return std
     
-def scatter(data, years, indexes, plot=False):
+def scatter(data, indexes, years, plot=True, percent=2.5, parts=10):
+    '''
+    Generates a trend graph of the correlation between two indices in their specific years or the trend line information between them
+    
+    Parameters:
+    -----------
+    
+        data -> dataframe of data
+        indexes ->  list with indexes strings
+        years -> list with the integers indicating, respectively, the year in which each index will be analyzed
+        plot -> boolean indicating whether the return will be a graph (True) or a tuple with the details of the trend line (False)
+        percent -> percentage limit of the amount of outliers that will be withdrawn
+        parts -> number of parts in which the data will be divided into findlinear
+    
+    Return:
+    -------
+        
+        plotly.plotly.iplot with the scatter plot and the trend line or a tuple with R-Square, trend line coefficient, the number of countries in the analysis and the function that was applied in the data
+        
+    Examples:
+    ---------
+    
+        scatter(data, [2014,2005], ['GDP per capita (current US$)', 'GDP growth (annual %)'])
+        
+        scatter(data, [2014,2005], ['GDP per capita (current US$)', 'GDP growth (annual %)'], True)
+    '''
     
     df = data.loc[(indexes[0]), [str(years[0])]].rename(columns = lambda x: '0').join(data.loc[indexes[1]][str(years[1])]).dropna()
     
@@ -62,7 +87,7 @@ def scatter(data, years, indexes, plot=False):
     
     for xitem in xlist:
         for yitem in ylist:
-            stdtest = remove_outliers(xitem[0], yitem[0])
+            stdtest = remove_outliers(xitem[0], yitem[0], percent, parts)
             xin, yin = xitem[0][stdtest].reshape(-1, 1), yitem[0][stdtest].reshape(-1, 1)
             modeltest = linear_model.LinearRegression().fit(xin, yin)
             r2test = modeltest.score(xin, yin)
