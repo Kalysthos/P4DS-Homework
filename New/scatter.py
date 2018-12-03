@@ -1,7 +1,9 @@
 import numpy as np
+from scipy import stats
 from sklearn import linear_model, preprocessing
 
 norm = lambda x: preprocessing.MinMaxScaler().fit_transform(x)
+cube = lambda x: x**(1/3) if x >= 0 else -abs(x)**(1/3)
 
 class divid:
     def __init__(self, x, n):
@@ -12,6 +14,7 @@ class divid:
         return np.setdiff1d(np.arange(self.x), self.cut[n])
     
 def findlinear(x, y, div=10):
+    np.random.seed(0)
     order = np.random.permutation(x.shape[0])
     x, y = x[order], y[order]
     split = divid(x.shape[0], div)
@@ -25,7 +28,7 @@ def findlinear(x, y, div=10):
             r2, model = r2test, modeltest
     return model
 
-def remove_outliers(x, y, percent=5):
+def remove_outliers(x, y, percent=2.5):
     model = findlinear(x, y)
     dist = abs(y - model.predict(x))
     desv = abs(dist - dist.mean())/np.std(dist) if np.std(dist).dtype == 'float64' and np.std(dist) != 0 else dist - dist
@@ -45,8 +48,8 @@ def scatter(data, years, indexes, plot=False):
         
     x = df[:,0].reshape(-1, 1)
     y = df[:,1].reshape(-1, 1)
-    xlist = [(norm(np.log(x)), "log(x)"), (norm(x), "x")] if x.min() > 0 else [(norm(x), "x")]
-    ylist = [(norm(np.log(y)), "log(y)"), (norm(y), "y")] if y.min() > 0 else [(norm(y), "y")]
+    xlist = [(norm(np.log(x)), "log(x)"), (norm(x), "x")] if x.min() > 0 else [(norm(cube(x)), "x**(1/3)"), (norm(x), "x")]
+    ylist = [(norm(np.log(y)), "log(y)"), (norm(y), "y")] if y.min() > 0 else [(norm(cube(y)), "y**(1/3)"), (norm(y), "y")]
     r2 = 0
     for i in xlist:
         for k in ylist:
@@ -63,6 +66,7 @@ def scatter(data, years, indexes, plot=False):
                     
     if plot:
         import matplotlib.pyplot as plt
+        plt.scatter(xold, yold, color='orange')
         plt.scatter(x, y, color='blue', s=50, alpha=.5)
         plt.plot(x, model.predict(x), color='red', linewidth=2.)
         plt.legend(["R**2 = {:0.4}".format(r2)])
@@ -72,4 +76,4 @@ def scatter(data, years, indexes, plot=False):
         plt.show()
         
     else:
-        return r2, model.coef_[0][0], x.shape[0], '{} - {}'.format(leix, leiy)
+        return r2, model.coef_[0][0], x.shape[0], '{} - {}'.format(leix, leiy), stats.pearsonr(x,y)[0][0]
