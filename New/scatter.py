@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import stats
 from sklearn import linear_model, preprocessing
 
 norm = lambda x: preprocessing.MinMaxScaler().fit_transform(x)
@@ -36,44 +35,79 @@ def remove_outliers(x, y, percent=2.5):
     for m in np.arange(2., 5., 0.25):
         std = desv < m 
         if std.sum() > part:
-            return x[std].reshape(-1, 1), y[std].reshape(-1, 1)
+            return std
     
 def scatter(data, years, indexes, plot=False):
     
-    df = np.append(np.array(data.loc[(indexes[0]), [str(years[0])]]).reshape(-1, 1), np.array(data.loc[indexes[1]][str(years[1])]).reshape(-1, 1), axis=1)
-    df = df[~np.any(np.isnan(df), axis=1), :]
+    df = data.loc[(indexes[0]), [str(years[0])]].rename(columns = lambda x: '0').join(data.loc[indexes[1]][str(years[1])]).dropna()
     
     if df.shape[0] < 20:
         raise ValueError('Without enough data')
         
-    x = df[:,0].reshape(-1, 1)
-    y = df[:,1].reshape(-1, 1)
+    x = np.array(df['0']).reshape(-1, 1)
+    y = np.array(df[str(years[1])]).reshape(-1, 1)
     xlist = [(norm(np.log(x)), "log(x)"), (norm(x), "x")] if x.min() > 0 else [(norm(cube(x)), "x**(1/3)"), (norm(x), "x")]
     ylist = [(norm(np.log(y)), "log(y)"), (norm(y), "y")] if y.min() > 0 else [(norm(cube(y)), "y**(1/3)"), (norm(y), "y")]
     r2 = 0
     for i in xlist:
         for k in ylist:
-            try:
-                xin, yin = remove_outliers(i[0], k[0])
-            except:
-                xin, yin = i[0], k[0]
+            stdtest = remove_outliers(i[0], k[0])
+            xin, yin = i[0][stdtest].reshape(-1, 1), k[0][stdtest].reshape(-1, 1)
             modeltest = linear_model.LinearRegression().fit(xin, yin)
             r2test = modeltest.score(xin, yin)
             if r2test >= r2:
-                x, y = xin, yin
+                std = stdtest
+                x, y = i[0], k[0]
                 leix, leiy = i[1], k[1]
                 model, r2 = modeltest, r2test
                     
     if plot:
-        import matplotlib.pyplot as plt
-        plt.scatter(xold, yold, color='orange')
-        plt.scatter(x, y, color='blue', s=50, alpha=.5)
-        plt.plot(x, model.predict(x), color='red', linewidth=2.)
-        plt.legend(["R**2 = {:0.4}".format(r2)])
-        plt.title('Tendency line {} - {}'.format(leix, leiy))
-        plt.xlabel(indexes[0])
-        plt.ylabel(indexes[1])
-        plt.show()
+        import plotly.plotly as py
+        import plotly.graph_objs as go
+        
+        trace = go.Scatter(
+            name = 'Inliers',
+            x = x[std],
+            y = y[std],
+            text = np.array(df.index).reshape(-1, 1)[std],
+            mode = 'markers',
+            marker = dict(
+                size = 10,
+                color = 'blue',
+                opacity = 0.5,
+            )
+        )
+        
+        outliers = go.Scatter(
+            name = 'Outliers',
+            x = x[~std],
+            y = y[~std],
+            text = np.array(df.index).reshape(-1, 1)[~std],
+            mode = 'markers',
+            marker = dict(
+                size = 10,
+                color = 'orange',
+                opacity = 0.5,
+            )
+        )
+        
+        scale = np.array([x.min(), x.max()]).reshape(-1, 1)
+        line = go.Scatter(
+            name = 'Trend line',
+            x = scale,
+            y = model.predict(scale),
+            mode='lines',
+            line=dict(color = 'red', width = 2.5,
+            )
+        )
+        
+        layout = go.Layout(
+            title = 'Tendency line {} - {}'.format(leix, leiy), 
+            xaxis = dict(title = '{} - Normalized - {}'.format(leix, indexes[0])),
+            yaxis = dict(title = '{} - Normalized - {}'.format(leiy, indexes[1]))
+        )
+        
+        return py.iplot(go.Figure(data= [trace, outliers, line], layout=layout))
         
     else:
-        return r2, model.coef_[0][0], x.shape[0], '{} - {}'.format(leix, leiy), stats.pearsonr(x,y)[0][0]
+        return r2, model.coef_[0][0], std.sum(), '{} - {}'.format(leix, leiy)
