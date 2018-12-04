@@ -91,9 +91,9 @@ between two indices in their respective years
         bar1.plot(kind='bar', ax=axes[0])
         bar2.plot(kind='bar', ax=axes[1])
         axes[0].set(xlabel = 'Country', ylabel = 'Normalized values',
-                    title = 'Smallest, medium and largest values of {} \n'.format(indexes[0]))
+                    title = 'xsml {} \n'.format(indexes[0]))
         axes[1].set(xlabel = 'Country', ylabel = 'Normalized values',
-                    title = 'Smallest, medium and largest values of {} \n'.format(indexes[1]))
+                    title = 'xsml {} \n'.format(indexes[1]))
         axes[0].legend(indexes)
         axes[1].legend(indexes)
         plt.show()
