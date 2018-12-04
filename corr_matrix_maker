@@ -1,0 +1,15 @@
+def corr_matrix(index,countries=None):
+    if countries == None:
+        countries=data_search(tbs,'index',index).index
+    corr = pd.DataFrame()
+    first=True
+    for country in countries:
+        if first:
+            first=False
+            f_country=country
+        country_data = data_search(tbs,'country',country).round(1)
+        R2s = country_data.astype(float).corr()[index]
+        corr = corr.join(R2s,how='outer',rsuffix=country)
+    corr.columns = [i[i.index(')')+1:] for i in corr.columns]
+    corr.columns = [i + f_country if i==corr.columns[0] else i for i in corr.columns]
+    return corr
