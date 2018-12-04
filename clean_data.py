@@ -18,14 +18,14 @@ def clean_tb(df,min_data=0,criteria=None):
         non-zero data. If it is 'sequence', the criterion will be the largest 
         non-null data sequence in the country. If it is 'lasts', the criterion 
         used will be the sequence from the last year.
-    To simply organize the table (without filtering the countries) just pass only the DataFrame.'''
+    To simply organize the table (without filtering the countries) simply do not pass the 'criteria' parameter.'''
     def longest_seq_data(data):
         '''\nReturns a pandas.Series containing the countries and the largest non-null data sequence length of each.
         Parameters:
         -----------
         data : pandas.DataFrame
             A table with the data to be counted.'''
-        import numpy as np
+
         max_s = []
         for i in data.T:
             index = data.T[i].isnull()
@@ -38,18 +38,20 @@ def clean_tb(df,min_data=0,criteria=None):
             else:
                 max_s.append(max(seq))
         return pd.Series(max_s,index=data.index)
+    
     df = df.dropna(axis = 1,how = 'all')
     if all([type(i)==str for i in df.columns]) == True:
         df.columns = [int(i) if i.isnumeric() else i for i in df.columns]
     if all([bool(criteria),type(min_data)==int]):
         if criteria == 'count':
-            df = df.dropna(thresh = min_data+4)
+            df = df.dropna(thresh = min_data+3)
         elif criteria == 'sequence':
             l_sequence = longest_seq_data(df)
             df = df.drop(index=[country for country in l_sequence.index if l_sequence(country) < min_data])
         elif criteria == 'lasts':
             last_year = max([i for i in df.columns if type(i) == int])
-            lasts = df[list(range(last_year-min_data+1,last_year+1))]
+            last_years = list(range(last_year-min_data+1,last_year+1))
+            lasts = df[df.columns[-1*min_data:]]
             remain_index = lasts.dropna(how='any').index
             df = df.drop(index = list(set(df.index) - set(remain_index)))
         
