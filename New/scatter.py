@@ -129,7 +129,7 @@ def scatter(data, indexes, years, plot=True, percent=3, parts=10):
         scale = np.array([x.min(), x.max()]).reshape(-1, 1)
         line = go.Scatter(
             name = 'Trend line',
-            x = scale, y = model.predict(scale),
+            x = scale.reshape(-1), y = model.predict(scale).reshape(-1),
             mode='lines',
             line=dict(color = 'red', width = 2.5)
         )
