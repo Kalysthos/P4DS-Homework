@@ -1,3 +1,8 @@
+Real interest rate (%)
+Inflation, consumer prices (annual %)
+Official exchange rate (LCU per US$, period average)
+Foreign direct investment, net inflows (BoP, current US$)
+Expense (% of GDP)
 Interest rescheduled, official (current US$)
 Adjusted net national income per capita (current US$)
 General government final consumption expenditure (constant 2010 US$)
