@@ -1,2 +1,2 @@
 cntry_region = pd.read_excel('API_AG.LND.IRIG.AG.ZS_DS2_en_excel_v2_10229263.xls',sheet_name='Países e Regiões').dropna()
-country_region = dict(zip(paises['TableName'],paises['Region'])) #Dicionario entre os países e as regiões a qual eles pertencem.
+Continents = dict(zip(paises['TableName'],paises['Region'])) #Dicionario entre os países e as regiões a qual eles pertencem.
