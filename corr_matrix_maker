@@ -1,7 +1,9 @@
-def corr_matrix(index):    
+def corr_matrix(index,countries=None):
+    if countries == None:
+        countries=data_search(tbs,'index',index).index
     corr = pd.DataFrame()
     first=True
-    for country in data_search(tbs,'index',index).index:
+    for country in countries:
         if first:
             first=False
             f_country=country
