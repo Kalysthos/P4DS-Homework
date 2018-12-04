@@ -1,3 +1,5 @@
+import plotly.plotly as py
+import plotly.graph_objs as go
 import numpy as np
 from sklearn import linear_model, preprocessing
 
@@ -34,7 +36,7 @@ def findlinear(x, y, parts):
             
     return model
 
-def remove_outliers(x, y, percent=2.5, parts=10):
+def remove_outliers(x, y, percent, parts):
     '''Remove possible outliers'''
     
     model = findlinear(x, y, parts)
@@ -47,7 +49,7 @@ def remove_outliers(x, y, percent=2.5, parts=10):
         if std.sum() >= part:
             return std
     
-def scatter(data, indexes, years, plot=True, percent=2.5, parts=10):
+def scatter(data, indexes, years, plot=True, percent=3, parts=10):
     '''
     Generates a trend graph of the correlation between two indices in their specific years or the trend line information between them
     
@@ -98,8 +100,6 @@ def scatter(data, indexes, years, plot=True, percent=2.5, parts=10):
                 model, r2 = modeltest, r2test
                     
     if plot:
-        import plotly.plotly as py
-        import plotly.graph_objs as go
         
         trace = go.Scatter(
             name = 'Inliers',
@@ -143,3 +143,53 @@ def scatter(data, indexes, years, plot=True, percent=2.5, parts=10):
         
     else:
         return r2, model.coef_[0][0], std.sum(), '{} - {}'.format(leix, leiy)
+    
+def plotcorr(corr, r2min=0.75):
+    '''
+    Generates the correlation graph of GDP per capita of 2017 with all indexes in its years of highest r2
+    
+    Parameters:
+    -----------
+    
+        data -> dataframe of correlation
+        r2min -> minimum r2 value for filtering
+    
+    Return:
+    -------
+        
+        plotly.plotly.iplot with the scatter plot of each index that went through the filtering
+        
+    Examples:
+    ---------
+    
+        plotcorr(corr, 0.5)
+    '''
+    
+    indices = list(set(corr.index.get_level_values(0)))
+    years = list(set(corr.index.get_level_values(1)))
+    r2, year, name = [], [], []
+    for indice in indices:
+        r2max = corr.loc[indice].sort_values('R2', ascending=False).iloc[0]
+        if r2max[0] >= r2min:
+            r2.append(r2max[0])
+            year.append(r2max.name)
+            name.append("{} <br>Coefficient: {:0.4} <br>Type of axis: {}".format(indice, r2max[1], r2max[3]))
+    
+    trace = go.Scatter(
+        x = r2, y = year,
+        text = name,
+        mode = 'markers',
+        marker = dict(
+            size = 10,
+            color = 'green',
+            opacity = 0.5
+        )
+    )
+    
+    layout = go.Layout(
+        title = 'Coefficient of determination (R2)', 
+        xaxis = dict(title = 'R2'),
+        yaxis = dict(title = 'Year')
+    )
+
+    return py.iplot(go.Figure(data= [trace], layout=layout))
