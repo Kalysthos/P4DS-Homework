@@ -28,6 +28,8 @@ def trend(data, index, countries, years):
         trend(data, 'GDP per capita (current US$)', ['Afghanistan', 'Brazil'], [2000, 2017]) 
     '''
     
+    fig = plt.figure(figsize=(10, 5))
+    
     for country in countries:
         plt.plot(data.loc[(index, country), [str(year) for year in range(years[0], years[1] + 1)]])
     
@@ -40,7 +42,7 @@ def trend(data, index, countries, years):
     
 def xsml(data, indexes, years, X):
     '''
-    Generates a bar graph with the X smallest, the X medium, and the X largest values of an index or comparison 
+    Generates a bar graph with the X smallest, the X medium, and the X largest values of an index or two charts with comparison
 between two indices in their respective years
     
     Parameters:
@@ -48,13 +50,13 @@ between two indices in their respective years
     
         data -> dataframe of data
         indexes -> index string or list with indexes strings
-        years -> integer or list with integers indicating the years for analysis
+        years -> integer or list with integers indicating the year(s) for analysis
         X -> integer indicating the number of countries for the analyze 
         
     Return:
     -------
         
-        matplotlib.pyplot.plot with the bar graph
+        matplotlib.pyplot.plot with the bar graph(s)
         
     Examples:
     ---------
@@ -66,6 +68,7 @@ between two indices in their respective years
     
     if type(indexes) == str:
         df = data.loc[indexes].drop('World')[str(years)].dropna().sort_values()
+        fig = plt.figure(figsize=(10, 5))
         
         amount = int(df.shape[0]/2)-int(X/2)
         df.iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))].plot(kind="bar")
@@ -77,16 +80,22 @@ between two indices in their respective years
     else:
         df1 = data.loc[indexes[0]].drop('World')[str(years[0])]
         df2 = data.loc[indexes[1]].drop('World')[str(years[1])]
-        df = pd.DataFrame(df1).rename(columns=lambda x: "0").join(df2).dropna().sort_values('0')
+        df = pd.DataFrame(df1).rename(columns=lambda x: "0").join(df2).dropna()
         df['0'] = norm(df['0'])
         df[str(years[1])] = norm(df[str(years[1])])
-        
         amount = int(df.shape[0]/2)-int(X/2)
-        df.iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))].plot(kind='bar')
-        plt.title('Bar graph')
-        plt.legend(indexes)
-        plt.xlabel('Country') 
-        plt.ylabel('Normalized values')
+        bar1 = df.sort_values('0').iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))]
+        bar2 = df.sort_values(str(years[1])).iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))]
+        
+        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
+        bar1.plot(kind='bar', ax=axes[0])
+        bar2.plot(kind='bar', ax=axes[1])
+        axes[0].set(xlabel = 'Country', ylabel = 'Normalized values',
+                    title = 'Smallest, medium and largest values of {} \n'.format(indexes[0]))
+        axes[1].set(xlabel = 'Country', ylabel = 'Normalized values',
+                    title = 'Smallest, medium and largest values of {} \n'.format(indexes[1]))
+        axes[0].legend(indexes)
+        axes[1].legend(indexes)
         plt.show()
     
 def trend_years(data, indexes, country, years, plot=True):
@@ -118,6 +127,7 @@ def trend_years(data, indexes, country, years, plot=True):
     '''
     
     df = data.loc[(indexes, country), [str(year) for year in range(years[0], years[1] + 1)]]
+    fig = plt.figure(figsize=(10, 5))
     
     if type(indexes) == str:
         df = df.dropna()
