@@ -38,5 +38,6 @@ b=(b-min(b)[0])/max(b-min(b)[0])[0]
 b=b.astype(float)
 
 x=np.linalg.solve(np.dot(A.T,A).astype(float),np.dot(A.T,b).astype(float))
-
+erros = (np.dot(A,x)-b)*(np.dot(A,x)-b)
+erros.sum
           
