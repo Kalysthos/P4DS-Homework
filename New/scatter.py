@@ -1,7 +1,8 @@
-import plotly.plotly as py
+import plotly.offline as py
 import plotly.graph_objs as go
 import numpy as np
 from sklearn import linear_model, preprocessing
+py.init_notebook_mode(connected=True)
 
 norm = lambda array: preprocessing.MinMaxScaler().fit_transform(array)
 cuberoot = lambda array: np.array([value**(1/3) if value >= 0 else -abs(value)**(1/3) for value in array])

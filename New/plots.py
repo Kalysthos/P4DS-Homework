@@ -38,16 +38,17 @@ def trend(data, index, countries, years):
     plt.setp(plt.xticks()[1], rotation=60)
     plt.show()
     
-def xsml(data, indexes, year, X):
+def xsml(data, indexes, years, X):
     '''
-    Generates a bar graph with the X smallest, the X medium, and the X largest values of an index or comparison between two indexes in a given year
+    Generates a bar graph with the X smallest, the X medium, and the X largest values of an index or comparison 
+between two indices in their respective years
     
     Parameters:
     -----------
     
         data -> dataframe of data
         indexes -> index string or list with indexes strings
-        year -> integer indicating the year for analysis
+        years -> integer or list with integers indicating the years for analysis
         X -> integer indicating the number of countries for the analyze 
         
     Return:
@@ -64,7 +65,7 @@ def xsml(data, indexes, year, X):
     '''
     
     if type(indexes) == str:
-        df = data.loc[indexes].drop('World')[str(year)].dropna().sort_values()
+        df = data.loc[indexes].drop('World')[str(years)].dropna().sort_values()
         
         amount = int(df.shape[0]/2)-int(X/2)
         df.iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))].plot(kind="bar")
@@ -74,11 +75,11 @@ def xsml(data, indexes, year, X):
         plt.show()
         
     else:
-        df1 = data.loc[indexes[0]].drop('World')[str(year)]
-        df2 = data.loc[indexes[1]].drop('World')[str(year)]
+        df1 = data.loc[indexes[0]].drop('World')[str(years[0])]
+        df2 = data.loc[indexes[1]].drop('World')[str(years[1])]
         df = pd.DataFrame(df1).rename(columns=lambda x: "0").join(df2).dropna().sort_values('0')
         df['0'] = norm(df['0'])
-        df[str(year)] = norm(df[str(year)])
+        df[str(years[1])] = norm(df[str(years[1])])
         
         amount = int(df.shape[0]/2)-int(X/2)
         df.iloc[list(range(0,X))+list(range(amount, amount+X))+list(range(-X,0))].plot(kind='bar')
@@ -128,7 +129,7 @@ def trend_years(data, indexes, country, years, plot=True):
             plt.plot(x, model.predict(x), color='red', linewidth=2.)
             plt.plot(x, y)
             plt.title('Trend graph and trend line')
-            plt.legend(["R**2 = {:0.4}".format(model.score(x, y)), "Coef = {:0.4}".format(model.coef_[0][0])])
+            plt.legend(["R2 = {:0.4}".format(model.score(x, y)), "Coef = {:0.4}".format(model.coef_[0][0])])
             plt.setp(plt.xticks()[1], rotation=60)
             plt.xlabel('Normalized years')
             plt.ylabel('Normalized values')
