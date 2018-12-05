@@ -1,4 +1,15 @@
 def corr_matrix(index,countries=None):
+    '''\nMakes a linear correlation matrix between the countries' indexes and other indexes.
+    Parameters:
+    -----------
+    index : str
+        A index to calculate a correlation. 
+    min_data : list
+        List of countries to get the data
+    Returns:
+        corr_matrix(index) returns the index correlation for all of the countries
+        corr_matrix(index,countries) returns the correlation just for the countries in the passed list.
+    '''
     if countries == None:
         countries=data_search(tbs,'index',index).index
     corr = pd.DataFrame()
@@ -10,6 +21,24 @@ def corr_matrix(index,countries=None):
         country_data = data_search(tbs,'country',country).round(1)
         R2s = country_data.astype(float).corr()[index]
         corr = corr.join(R2s,how='outer',rsuffix=country)
-    corr.columns = [i[i.index(')')+1:] for i in corr.columns]
+    corr.columns = [i[len(index):] for i in corr.columns]
     corr.columns = [i + f_country if i==corr.columns[0] else i for i in corr.columns]
     return corr
+    
+    def most_corr_indexes(index,list_countries):
+    '''\nCalculate in how many countries the correlation of each index is high (greater than 0.7)
+    Parameters:
+    index : str
+        A target to get the correlations
+    list_countries : list
+        A list of countries to verify the correlation.
+    Returns a pd.Series with the index and the frequency.'''
+    corr=corr_matrix(index,list_countries)
+    indexes = []
+    for country in list_countries:
+        for index in corr.sort_values(country,ascending=False)[corr[country]>0.7].index:
+            indexes.append(index)
+    counts = {}
+    for index in indexes:
+        counts[index] = indexes.count(index)
+    return pd.Series(counts).sort_values(ascending=False)
