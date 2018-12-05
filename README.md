@@ -1,18 +1,10 @@
 P4DS-Homework
 
-Este repositório trata-se de uma análise de indicadores econômicos e sua influência no PIB percapita. Nós faremos uma análise de longo e curto prazo e já contamos com as primeiras análises. 
+Este repositório trata-se de uma análise de indicadores econômicos e sua influência no PIB percapita. 
+
+ 	A discussão acerca do que torna os países pobres ou ricos é um debate acalorado na literatura. Liberalismo econômico, industrialização, educação entre outros fatores exercem influência sobre a trajetória da taxa de crescimento do PIB per capita, além de fatos históricos isolados. O comércio exterior, por exemplo, é um dos aspectos que causam impacto no crescimento econômico, contudo, durante o século XX, alguns países como a Austrália e o Canadá exportavam basicamente commodities, por outro lado países como a Inglaterra e Alemanha exportavam produtos industrializados, porém tanto a Austrália quanto o Canadá atingiram níveis altos de desenvolvimento e PIB per capita. Dessa forma, quais fatores teriam mais importância no crescimento econômico? É possível combinar vários fatores e prever o crescimento de um país nos próximos anos?
+
 Vamos ao que você precisa para entender nosso trabalho:
-
-0. De antemão os módulos serão utilizados são:
-
-pandas
-numpy
-seaborn
-matplotlib.pyplot
-geopandas
-altair
-os
-sklearn
 
 1. Os dados foram todos do Banco Mundial, o banco mundial possui um relatório para cada indicador com argumentos gerais que justificam porque um indicador pode ser importante para o desenvolvimento, a partir de sua indcação da importância do mercado de capitais, começamos nossa análise estudando esse indicador. Na nossa primeira análise chegamos a conclusão que no curto prazo taxa de juros real americana possui forte relação negativa com o PIB Mundial que pode ser explicado pela teoria econômica, você conferir nosso trabalho em Análise e Visualização - PartialProject.ipynb. Cada passagem está descrita no código e as variáveis foram nomeadas de forma que você consiga entender o código. 
 2. As primeiras linhas do código é a importação dos pacotes e dados que serão utilizados, pode ser que demore um pouco pois a quantidades de dados é grande, não se preocupe. 
@@ -35,3 +27,11 @@ Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/analyze.py
 Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/countries.txt   
 Em outros módulos você também encontra o trabalho fragmentado. 
 Nossa apresentação em slides se encontra em: P4DS - GDP - PowerPoint.pptx.
+
+• simple_table (Facilitar a construção de gráficos no altair e plotly) 
+Link: https://github.com/Kalysthos/P4DS_Homework/blob/master/Simple_Table.py
+
+• animated_charts (Construção de gráficos animados no plotly)
+Link: https://github.com/Kalysthos/P4DS_Homework/blob/master/animated_chart.py
+
+Os módulos contem as análises e outras funções de machine learning para construção de relação entre PIB e indicadores. 
