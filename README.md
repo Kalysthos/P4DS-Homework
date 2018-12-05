@@ -2,8 +2,6 @@ P4DS-Homework
 
 Este repositório trata-se de uma análise de indicadores econômicos e sua influência no PIB percapita. 
 
- 	A discussão acerca do que torna os países pobres ou ricos é um debate acalorado na literatura. Liberalismo econômico, industrialização, educação entre outros fatores exercem influência sobre a trajetória da taxa de crescimento do PIB per capita, além de fatos históricos isolados. O comércio exterior, por exemplo, é um dos aspectos que causam impacto no crescimento econômico, contudo, durante o século XX, alguns países como a Austrália e o Canadá exportavam basicamente commodities, por outro lado países como a Inglaterra e Alemanha exportavam produtos industrializados, porém tanto a Austrália quanto o Canadá atingiram níveis altos de desenvolvimento e PIB per capita. Dessa forma, quais fatores teriam mais importância no crescimento econômico? É possível combinar vários fatores e prever o crescimento de um país nos próximos anos?
-
 Vamos ao que você precisa para entender nosso trabalho:
 
 1. Os dados foram todos do Banco Mundial, o banco mundial possui um relatório para cada indicador com argumentos gerais que justificam porque um indicador pode ser importante para o desenvolvimento, a partir de sua indcação da importância do mercado de capitais, começamos nossa análise estudando esse indicador. Na nossa primeira análise chegamos a conclusão que no curto prazo taxa de juros real americana possui forte relação negativa com o PIB Mundial que pode ser explicado pela teoria econômica, você conferir nosso trabalho em Análise e Visualização - PartialProject.ipynb. Cada passagem está descrita no código e as variáveis foram nomeadas de forma que você consiga entender o código. 
