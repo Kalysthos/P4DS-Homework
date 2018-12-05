@@ -45,7 +45,7 @@ def remove_outliers(x, y, percent, parts):
     distance.dtype = 'float64'
     deviation = abs(distance - distance.mean())/np.std(distance) if np.std(distance) != 0 else distance*0
     part = (100-percent)/100*x.shape[0]
-    for multiplier in np.arange(2., 5., 0.25):
+    for multiplier in np.arange(2., 5., 0.5):
         std = deviation < multiplier 
         if std.sum() >= part:
             return std
@@ -126,7 +126,7 @@ def scatter(data, indexes, years, plot=True, percent=3, parts=10):
             )
         )
         
-        scale = np.array([x.min(), x.max()]).reshape(-1, 1)
+        scale = np.array([x[std].min(), x[std].max()]).reshape(-1, 1)
         line = go.Scatter(
             name = 'Trend line',
             x = scale.reshape(-1), y = model.predict(scale).reshape(-1),
@@ -136,8 +136,10 @@ def scatter(data, indexes, years, plot=True, percent=3, parts=10):
         
         layout = go.Layout(
             title = 'Tendency line {} - {}'.format(leix, leiy), 
-            xaxis = dict(title = '{} - Normalized - {}'.format(leix, indexes[0])),
-            yaxis = dict(title = '{} - Normalized - {}'.format(leiy, indexes[1]))
+            xaxis = dict(title = '{} - Normalized - {} - {}'.format(leix, years[0], indexes[0])),
+            yaxis = dict(title = '{} - Normalized - {} - {}'.format(leiy, years[1], indexes[1])),
+            annotations=[dict(x=-0.075, y=1.1, text='R2: {:0.4}'.format(r2), showarrow=False),
+                        dict(x=-0.075, y=1.05, text='Coef: {:0.4}'.format(model.coef_[0][0]), showarrow=False)]
         )
         
         return py.iplot(go.Figure(data= [trace, outliers, line], layout=layout))
