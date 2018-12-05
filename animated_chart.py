@@ -9,7 +9,6 @@ from plotly.tools import FigureFactory as FF
 import pandas as pd
 import time
 import plotly
-plotly.tools.set_credentials_file(username='AngeloLJr', api_key='qDRwyLugi7YJQSBF6fl6')
 
 def animated_chart(merged_df):
     '''

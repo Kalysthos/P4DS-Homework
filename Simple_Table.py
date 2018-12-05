@@ -20,7 +20,7 @@ def simple_table(indicator):
     '''
 
     #UTILIZANDO O MÓDULO data.pickle PARA ABRIR DADOS DO PIB PER CAPITA DOS PAÍSES NOS ANOS DE 1975 A 2015:
-    indicator_df=pd.read_pickle('New/data.pickle').loc[indicator][[str(num) for num in range(1975,2015)]]
+    indicator_df=pd.read_pickle('data.pickle').loc[indicator][[str(num) for num in range(1975,2015)]]
 
     #EXCLUINDO CÉDULAS VAZIAS:
     cols = []
