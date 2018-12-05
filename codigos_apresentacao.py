@@ -105,26 +105,30 @@ def func6():
     import numpy as np
     import pandas as pd
     from sklearn.preprocessing import MinMaxScaler
-    import plotly.offline as py
-    import plotly.graph_objs as go
-    py.init_notebook_mode(connected=True)
+    import plotly
+    plotly.tools.set_credentials_file(username='Felvc027', api_key='j63ixa5dFTZ9Crf97maA')
     import matplotlib.pyplot as plt
-    
+
     import data2 as d
+
     norm = lambda df: MinMaxScaler().fit_transform(np.array(df, dtype="float64").reshape(-1, 1))
-    
+
     tbs = [clean_tb(df,17,'lasts') for df in d.data if len(clean_tb(df,17,'lasts').index) > 0]
-    
+
     co2_emission=data_search(tbs,'index','CO2 emissions (metric tons per capita)').T[3:].dropna()
-    
+
     gdp=data_search(tbs,'index','GDP per capita (current US$)').T[3:].dropna()
-    
+
     co2_emission,gdp=co2_emission[4:-1],gdp[:-4]
+
     for col in co2_emission.columns:
         co2_emission[col] = norm(co2_emission[col])
+
     for col in gdp.columns:
         gdp[col]=norm(gdp[col])
+
     countries=[i for i in gdp.columns if i in co2_emission.columns]
+
     parameters={}
     As = {}
     bs = {}
@@ -135,15 +139,16 @@ def func6():
         parameters[country]=np.linalg.solve(np.dot(A.T,A),np.dot(A.T,b))
         As[country]=A
         bs[country]=b
+
     real_gdp = data_search(tbs,'index','GDP per capita (current US$)').T[3:].dropna()
     maxis = dict(zip(countries,[real_gdp[i][:-4].max() for i in countries]))
     minis= dict(zip(countries,[real_gdp[i][:-4].min() for i in countries]))
     shots=[((np.dot(As[i],parameters[i])*(maxis[i]-minis[i]))+(minis[i])) for i in countries]
-    
+
     err = [sum((real_gdp[countries[i]][1:-4].values.reshape(-1,1)-shots[i])**2)/len(shots[i]) for i in range(len(countries))]
-    
+
     k=countries.index('Qatar')
-    
+
     shots2014=[]
     for i in countries:
         min_tr=min(data_search(tbs,'index','CO2 emissions (metric tons per capita)').T[3:].dropna()[i][:-1])
@@ -161,9 +166,15 @@ def func6():
         shot2014 *= (max_gdps-min_gdps)
         shot2014 += min_gdps
         shots2014.append(shot2014)
-        
+
     gdp2014 = data_search(tbs,'index','GDP per capita (current US$)').T[3:].dropna()[countries][-4:-3].T
+
     RealXModel = gdp2014.join(pd.DataFrame(shots2014,index=countries,columns=['Model Shot'])).sort_values('Model Shot')
+
+
+    import plotly.offline as py
+    import plotly.graph_objs as go
+    py.init_notebook_mode(connected=True)
 
     Real_GDP = go.Scatter(
         y = np.array(RealXModel[2014]), text = RealXModel.index,
@@ -174,17 +185,13 @@ def func6():
     trace2 = go.Scatter(
         y = np.array(RealXModel['Model Shot']), text = RealXModel.index,
         mode='lines',
-        line = dict(color = 'blue', width = 2),
-        name='Real GDP'
+        line = dict(color = 'blue', width = 2)
     )
 
     layout = go.Layout(
         title = 'Real GDP X Model Shot', 
         xaxis = dict(title = 'GDP'),
-        yaxis = dict(title = 'GDP per capita'),
-        name='Model Shot'
+        yaxis = dict(title = 'GDP per capita')
     )
 
     return py.iplot(go.Figure(data= [Real_GDP, trace2], layout=layout))
-    
-    
