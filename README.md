@@ -1,4 +1,4 @@
-P4DS-Homework
+Trabalho do curso de Introdução à Ciência de Dados da Escola de Matemática Aplicada - FGV
 
 Este repositório trata-se de uma análise de indicadores econômicos e sua influência no PIB percapita. 
 
