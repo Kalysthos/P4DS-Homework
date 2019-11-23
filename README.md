@@ -9,27 +9,27 @@ Vamos ao que você precisa para entender nosso trabalho:
 3. As funções de limpeza são : 
 
 •	Indicators (indices escolhidos para análise):
-Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/Indicators.txt  
+Link: https://github.com/wnsena/P4DS-Homework/blob/master/Indicators.txt  
 
 •	 Data e Data2(extração dos dados automática):
-Link para Data: https://github.com/Kalysthos/P4DS-Homework/blob/master/data.py  
+Link para Data: https://github.com/wnsena/P4DS-Homework/blob/master/data.py  
 (O date2 é uma variação de data menos trabalhosa)
 
 •	Clean_Data(Limpeza e Organização das Tabelas): 
-Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/clean_data.py  
+Link: https://github.com/wnsena/P4DS-Homework/blob/master/clean_data.py  
 
 •	Analyze (Função para facilitar a seleção de dados para objetivos específicos):
-Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/analyze.py  
+Link: https://github.com/wnsena/P4DS-Homework/blob/master/analyze.py  
 
 •	 Countries(Arquivo com nomes de países - para separar países dos blocos):
-Link: https://github.com/Kalysthos/P4DS-Homework/blob/master/countries.txt   
+Link: https://github.com/wnsena/P4DS-Homework/blob/master/countries.txt   
 Em outros módulos você também encontra o trabalho fragmentado. 
 Nossa apresentação em slides se encontra em: P4DS - GDP - PowerPoint.pptx.
 
 • simple_table (Facilitar a construção de gráficos no altair e plotly) 
-Link: https://github.com/Kalysthos/P4DS_Homework/blob/master/Simple_Table.py
+Link: https://github.com/wnsena/P4DS_Homework/blob/master/Simple_Table.py
 
 • animated_charts (Construção de gráficos animados no plotly)
-Link: https://github.com/Kalysthos/P4DS_Homework/blob/master/animated_chart.py
+Link: https://github.com/wnsena/P4DS_Homework/blob/master/animated_chart.py
 
 Os módulos contem as análises e outras funções de machine learning para construção de relação entre PIB e indicadores. 
